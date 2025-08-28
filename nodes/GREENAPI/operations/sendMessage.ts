@@ -6,7 +6,7 @@ export async function sendMessage(this: IExecuteFunctions, items: INodeExecution
 	for (let i = 0; i < items.length; i++) {
 		const chatId = this.getNodeParameter('chatId', i, '') as string;
 		const message = this.getNodeParameter('message', i, '') as string;
-		const credentials = await this.getCredentials('greenApiCredentials') as {
+		const credentials = await this.getCredentials('GreenApiAuth') as {
 			idInstance: string;
 			apiTokenKey: string;
 		};

@@ -428,6 +428,8 @@ const properties: INodeProperties[] = [
 				default: {},
 				typeOptions: {
 					multipleValues: true,
+					minAllowedFields: 1,
+					maxAllowedFields: 3,
 				},
 				options: [
 					{
@@ -502,6 +504,7 @@ const properties: INodeProperties[] = [
 				name: 'minutes',
 				type: 'string',
 				default: '',
+				/// тут ограничить до 20160 наверн
 				required: false,
 				description: 'minutes',
 				displayOptions: {

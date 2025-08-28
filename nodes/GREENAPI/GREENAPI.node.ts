@@ -6,7 +6,7 @@ import type {
 	INodeType,
 	INodeTypeDescription,
 } from 'n8n-workflow';
-import { NodeConnectionType /*, NodeOperationError*/ } from 'n8n-workflow';
+import { NodeConnectionType } from 'n8n-workflow';
 import properties from './properties';
 import { sendMessage } from './operations/sendMessage';
 import { sendFileByUrl } from './operations/sendFileByUrl';
@@ -24,24 +24,24 @@ declare const console: any;
 
 
 
-export class ExampleNode implements INodeType {
+export class GREENAPI implements INodeType {
 //export class GREEN_API implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'GREEN-API for WhatsApp',
-		name: 'exampleNode',
+		name: 'GREENAPI',
 		///name: 'GREEN-API',
 		group: ['transform'],
 		version: 1,
 		description: 'Node description', /// ##### !!!!!!!!
  		defaults: {
-			name: 'sendMessage',
+			name: 'GREENAPI',
 		},
 		inputs: [NodeConnectionType.Main],
 		outputs: [NodeConnectionType.Main],
 		usableAsTool: true,
 		credentials: [
 			{
-				name: 'greenApiCredentials',
+				name: 'GreenApiAuth',
 				required: true,
 			},
 		],

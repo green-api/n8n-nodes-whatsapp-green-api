@@ -18,7 +18,7 @@ export async function sendInteractiveButtonsReply(this: IExecuteFunctions, items
         const footer = this.getNodeParameter('footer', i, '') as string;
         const buttonsRaw = this.getNodeParameter('buttons', i, { button: [] }) as { button: { buttonText: string }[] };
         const buttons = transformButtonsSimple(buttonsRaw);
-        const credentials = await this.getCredentials('greenApiCredentials') as {
+        const credentials = await this.getCredentials('GreenApiAuth') as {
             idInstance: string;
             apiTokenKey: string;
         };

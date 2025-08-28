@@ -5,8 +5,8 @@ import {
 	INodeProperties,
 } from 'n8n-workflow';
 
-export class ExampleCredentialsApi implements ICredentialType {
-	name = 'greenApiCredentials';
+export class GreenApiAuth implements ICredentialType {
+	name = 'GreenApiAuth';
 	displayName = 'Green-API Credentials';
 
 	documentationUrl = 'https://green-api.com/en/docs';

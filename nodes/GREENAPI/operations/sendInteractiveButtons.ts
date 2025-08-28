@@ -50,7 +50,7 @@ export async function sendInteractiveButtons(this: IExecuteFunctions, items: INo
             button?: { type: string, buttonId: string, buttonText: string, copycode?: string, phoneNumber?: string, url?: string}[];
         };
         const buttons = transformButtons(buttonsRaw);
-        const credentials = await this.getCredentials('greenApiCredentials') as {
+        const credentials = await this.getCredentials('GreenApiAuth') as {
             idInstance: string;
             apiTokenKey: string;
         };
