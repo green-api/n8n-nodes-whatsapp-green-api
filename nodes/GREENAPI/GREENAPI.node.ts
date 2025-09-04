@@ -23,7 +23,6 @@ import { sendInteractiveButtonsReply } from './operations/sendInteractiveButtons
 
 
 export class GREENAPI implements INodeType {
-//export class GREEN_API implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'GREEN-API for WhatsApp',
 		name: 'GREENAPI',

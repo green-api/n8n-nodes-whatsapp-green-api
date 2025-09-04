@@ -33,42 +33,6 @@ export class GreenApiAuth implements ICredentialType {
 		},
 	];
 
-	/*
-	methods = {
-		credentialTest: {
-			async validateConnection(
-				this: ICredentialTestFunctions,
-				credentials: ICredentialDataDecryptedObject,
-			): Promise<INodeCredentialTestResult> {
-				console.log('мы здесь!')
-				try {
-					const response = await this.helpers.request({
-						url: `https://api.green-api.com/waInstance${credentials.idInstance}/getStateInstance/${credentials.apiTokenKey}`,
-						method: 'GET',
-						json: true,
-					});
-
-					if (response.stateInstance !== 'authorized') {
-						return {
-							status: 'Error',
-							message: 'Instance is not authorized',
-						};
-					}
-
-					return {
-						status: 'OK',
-						message: 'Connection successful!',
-					};
-				} catch (error: any) {
-					return {
-						status: 'Error',
-						message: `Authentication failed: ${error.message}`,
-					};
-				}
-			},
-		},
-	};*/
-
 	test: ICredentialTestRequest = {
 		request: {
 			baseURL: 'https://api.green-api.com/',
