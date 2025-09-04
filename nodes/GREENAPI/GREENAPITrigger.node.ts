@@ -13,7 +13,7 @@ export class GREENAPITrigger implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'GREENAPI Trigger',
 		name: 'GREENAPITrigger',
-		//icon: 'file:telegram.svg',
+		icon: 'file:greenapi.svg',
 		group: ['trigger'],
 		version: 1,
 		//subtitle: '=Updates: {{$parameter["updates"].join(", ")}}',

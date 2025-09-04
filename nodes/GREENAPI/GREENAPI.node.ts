@@ -1,7 +1,5 @@
 import type {
 	IExecuteFunctions,
-	//ITriggerFunctions,
-	//IWebhookResponseData,
 	INodeExecutionData,
 	INodeType,
 	INodeTypeDescription,
@@ -20,7 +18,7 @@ import { lastIncomingMessages } from './operations/lastIncomingMessages';
 import { getGroupData } from './operations/getGroupData';
 import { sendInteractiveButtons } from './operations/sendInteractiveButtons';
 import { sendInteractiveButtonsReply } from './operations/sendInteractiveButtonsReply';
-declare const console: any;
+//declare const console: any;
 
 
 
@@ -29,7 +27,7 @@ export class GREENAPI implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'GREEN-API for WhatsApp',
 		name: 'GREENAPI',
-		///name: 'GREEN-API',
+		icon: 'file:greenapi.svg',
 		group: ['transform'],
 		version: 1,
 		description: 'Node description', /// ##### !!!!!!!!
