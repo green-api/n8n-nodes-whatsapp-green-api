@@ -175,7 +175,7 @@ export class GREENAPITrigger implements INodeType {
                     method: 'POST',
                     uri: `https://api.green-api.com/waInstance${credentials.idInstance}/setSettings/${credentials.apiTokenKey}`,
                     body: {
-                        webhookUrl: "", //насколько нужно удалять вебхук... хмммм
+                        //webhookUrl: "", //насколько нужно удалять вебхук... хмммм... наверное, не нужно
                     },
                     json: true,
                 });
@@ -198,15 +198,15 @@ export class GREENAPITrigger implements INodeType {
         const body = this.getBodyData();
 		const data = this.helpers.returnJsonArray(body);
 
+
+		// тип вебхука (входящее, исходящее и т.д.)
 		const params = this.getNodeParameter('webhookType', []) as string[];
-		const thisTypeWebhook = data[0].json.typeWebhook as string; //перепроверить
+		const thisTypeWebhook = data[0].json.typeWebhook as string;
 
-		//console.log(params);
-		//console.log(thisTypeWebhook);
 
-		const chatType = this.getNodeParameter('chatType') as string; // работать сюда
-		
-		const thisMessageChatType = ((data[0].json as any).senderData.chatId).slice(-4) as string; // последние 4 символа строки
+		// тип чата (личный, группа)
+		const chatType = this.getNodeParameter('chatType') as string;
+		const thisMessageChatType = ((data[0].json as any).senderData.chatId).slice(-4) as string;
 		let thisChatType!: string;
 		if(thisMessageChatType === 'c.us'){
 			thisChatType = 'chatReceiveRestriction'
@@ -214,36 +214,18 @@ export class GREENAPITrigger implements INodeType {
 		if(thisMessageChatType === 'g.us'){
 			thisChatType = 'groupReceiveRestriction'
 		}
-		//console.log(chatType);
-		//console.log(thisChatType);
 
-		//const chats = (this.getNodeParameter('chatIds', []) as unknown) as string[];// не проверял
-		const raw = this.getNodeParameter('additionalFields.chatIds', []) as Array<{ chatId: string }>; // не берутся !!!
-		const chats = raw.map(i => i.chatId);
+		// список разрешенных чатов по chatId
+		const chatsCollection = this.getNodeParameter('chatIds', 0, {}) as {
+            chatId: { chatId: string }[];
+        };
+        const chats = (chatsCollection.chatId || []).map(c => c.chatId);
 		const thisChatWebhook = (data[0].json as any).senderData.chatId as string; 
 
-		//console.log(params);
-		//console.log(thisChatWebhook);
-
 		if(typeWebhook.includes(thisTypeWebhook)){
-			if ((Array.isArray(params) && params.includes(thisTypeWebhook)) || (params.length === 0)){
-				//console.log('прошли проверку1');
-				console.log(chats);
-				console.log(chats.length);
-				//console.log(thisChatWebhook);
-				if(Array.isArray(chats)){
-					//console.log('chats is array')
-				}
-				if(chats.includes(thisChatWebhook)){
-					//console.log('chats include thischatwebhook')
-				}
-				if(chats.length === 0){
-					//console.log('chat length is zero')
-				}
-				if ((Array.isArray(chats) && chats.includes(thisChatWebhook)) || (chats.length === 0)){
-					console.log('прошли проверку2');
-					if ((chatType === thisChatType) || (chatType === 'noReceiveRestriction')){ // работать сюда!
-						console.log('прошли проверку3');
+			if ((Array.isArray(params) && params.includes(thisTypeWebhook)) || (params.length === 0)){ // проверка на тип вебхука
+				if ((Array.isArray(chats) && chats.includes(thisChatWebhook)) || (chats.length === 0)){ // проверка на разрешенный чат
+					if ((chatType === thisChatType) || (chatType === 'noReceiveRestriction')){ // проверка на тип чата
 						return {
 							workflowData: [this.helpers.returnJsonArray(body),],
 							webhookResponse: 'OK',
