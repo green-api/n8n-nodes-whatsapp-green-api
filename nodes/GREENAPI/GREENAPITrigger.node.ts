@@ -16,8 +16,8 @@ export class GREENAPITrigger implements INodeType {
 		icon: 'file:greenapi.svg',
 		group: ['trigger'],
 		version: 1,
-		//subtitle: '=Updates: {{$parameter["updates"].join(", ")}}',
-		description: 'Starts the workflow on a Telegram update',
+		//subtitle: '=Updates: {{$parameter["updates"].join(", ")}}', // это что вообще??
+		description: 'Starts the workflow on a Telegram update', // tElEgRaM7?
 		defaults: {
 			name: 'GREENAPI Trigger',
 		},
@@ -40,15 +40,15 @@ export class GREENAPITrigger implements INodeType {
 		properties: [
 			{
 				displayName:
-					'Due to Telegram API limitations, you can use just one Telegram trigger for each bot at a time',
-				name: 'telegramTriggerNotice',
-				type: 'notice',
-				default: '',
+					'Due to Telegram API limitations, you can use just one Telegram trigger for each bot at a time', // tElEgRaM7?
+				name: 'telegramTriggerNotice', //
+				type: 'notice', //
+				default: '', //
 			},
 			{
 				displayName: 'Trigger On',
-				name: 'updates',
-				hint: 'if none is chosen, all types will be processed',//!!!!
+				name: 'webhookType',
+				hint: 'if none is chosen, all types will be processed',// как будто не очень звучит
 				type: 'multiOptions',
 				options: [
 					{
@@ -63,20 +63,46 @@ export class GREENAPITrigger implements INodeType {
 							'Trigger on new outgoing message sent from phone',
 					},
 					{
-						name: 'outgoing message status',
-						value: 'outgoingMessageStatus',
-						description: 'Trigger on new sent message status',
+						name: 'outgoing message sent from API',
+						value: 'outgoingAPIMessageReceived',
+						description: 'Trigger on new outgoing message sent from API',
 					},
 				],
 				required: false,
-				default: [],
+				default: 'incomingMessageReceived',
+			},
+			{
+				displayName: 'Receiving from',
+				name: 'chatType',
+				hint: 'if none is chosen, all types will be processed',//!!!!
+				type: 'options',
+				options: [
+					{
+						name: 'Receive all',
+						value: 'noReceiveRestriction',
+						description: 'Trigger on new sent message status', //
+					},
+					{
+						name: 'Only from chats',
+						value: 'chatReceiveRestriction',
+						description: 'Trigger on new incoming message', //
+					},
+					{
+						name: 'Only from groups',
+						value: 'groupReceiveRestriction',
+						description:
+							'Trigger on new outgoing message sent from phone', //
+					},
+				],
+				required: true,
+				default: 'noReceiveRestriction',
 			},
 			{
 				displayName:
 					'Every uploaded attachment, even if sent in a group, will trigger a separate event. You can identify that an attachment belongs to a certain group by <code>media_group_id</code> .',
-				name: 'attachmentNotice',
-				type: 'notice',
-				default: '',
+				name: 'attachmentNotice', //
+				type: 'notice', //
+				default: '', //
 			},
             {
 				displayName: 'Restrict to Chat IDs',
@@ -110,13 +136,12 @@ export class GREENAPITrigger implements INodeType {
     webhookMethods: any = {
         default: {
 
-            async checkExists(this: IHookFunctions): Promise<boolean> {  // setSettings webhookUrl
+            async checkExists(this: IHookFunctions): Promise<boolean> {
                 console.log('>>> [MyApiTrigger] CHECKEXISTS called!');
-                const credentials = await this.getCredentials('GreenApiAuth'); // если нужны креды
+                const credentials = await this.getCredentials('GreenApiAuth');
                 const webhookUrl = this.getNodeWebhookUrl('default');
 				console.log(webhookUrl);
 
-                // Регистрируем вебхук во внешнем API
                 const response = await this.helpers.request({
                     method: 'GET',
                     uri: `https://api.green-api.com/waInstance${credentials.idInstance}/getSettings/${credentials.apiTokenKey}`,
@@ -134,6 +159,9 @@ export class GREENAPITrigger implements INodeType {
                     uri: `https://api.green-api.com/waInstance${credentials.idInstance}/setSettings/${credentials.apiTokenKey}`,
                     body: {
                         webhookUrl: webhookUrl,
+						incomingWebhook: 'yes',
+						outgoingAPIMessageWebhook: 'yes',
+    					outgoingMessageWebhook: 'yes',
                     },
                     json: true,
                 });
@@ -147,7 +175,7 @@ export class GREENAPITrigger implements INodeType {
                     method: 'POST',
                     uri: `https://api.green-api.com/waInstance${credentials.idInstance}/setSettings/${credentials.apiTokenKey}`,
                     body: {
-                        webhookUrl: "",
+                        webhookUrl: "", //насколько нужно удалять вебхук... хмммм
                     },
                     json: true,
                 });
@@ -170,22 +198,57 @@ export class GREENAPITrigger implements INodeType {
         const body = this.getBodyData();
 		const data = this.helpers.returnJsonArray(body);
 
-		const params = this.getNodeParameter('updates', []) as string[];
-		const thisTypeWebhook = data[0].json.typeWebhook as string; //проверка на typeWebhook
+		const params = this.getNodeParameter('webhookType', []) as string[];
+		const thisTypeWebhook = data[0].json.typeWebhook as string; //перепроверить
 
-		console.log(params);
-		console.log(thisTypeWebhook)
+		//console.log(params);
+		//console.log(thisTypeWebhook);
 
-		const chats = this.getNodeParameter('updates', []) as string[];
+		const chatType = this.getNodeParameter('chatType') as string; // работать сюда
+		
+		const thisMessageChatType = ((data[0].json as any).senderData.chatId).slice(-4) as string; // последние 4 символа строки
+		let thisChatType!: string;
+		if(thisMessageChatType === 'c.us'){
+			thisChatType = 'chatReceiveRestriction'
+		}
+		if(thisMessageChatType === 'g.us'){
+			thisChatType = 'groupReceiveRestriction'
+		}
+		//console.log(chatType);
+		//console.log(thisChatType);
+
+		//const chats = (this.getNodeParameter('chatIds', []) as unknown) as string[];// не проверял
+		const raw = this.getNodeParameter('additionalFields.chatIds', []) as Array<{ chatId: string }>; // не берутся !!!
+		const chats = raw.map(i => i.chatId);
 		const thisChatWebhook = (data[0].json as any).senderData.chatId as string; 
+
+		//console.log(params);
+		//console.log(thisChatWebhook);
 
 		if(typeWebhook.includes(thisTypeWebhook)){
 			if ((Array.isArray(params) && params.includes(thisTypeWebhook)) || (params.length === 0)){
+				//console.log('прошли проверку1');
+				console.log(chats);
+				console.log(chats.length);
+				//console.log(thisChatWebhook);
+				if(Array.isArray(chats)){
+					//console.log('chats is array')
+				}
+				if(chats.includes(thisChatWebhook)){
+					//console.log('chats include thischatwebhook')
+				}
+				if(chats.length === 0){
+					//console.log('chat length is zero')
+				}
 				if ((Array.isArray(chats) && chats.includes(thisChatWebhook)) || (chats.length === 0)){
-					return {
-						workflowData: [this.helpers.returnJsonArray(body),],
-						webhookResponse: 'OK',
-					};
+					console.log('прошли проверку2');
+					if ((chatType === thisChatType) || (chatType === 'noReceiveRestriction')){ // работать сюда!
+						console.log('прошли проверку3');
+						return {
+							workflowData: [this.helpers.returnJsonArray(body),],
+							webhookResponse: 'OK',
+						};
+					}
 				}
 			}
 		}

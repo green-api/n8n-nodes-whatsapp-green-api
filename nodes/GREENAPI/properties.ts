@@ -164,6 +164,7 @@ const properties: INodeProperties[] = [
 				name: 'groupId',
 				type: 'string',
 				default: '',
+				placeholder: '120363043968066561@g.us',
 				displayOptions: {
 					show: {
 						resource: [
@@ -178,6 +179,7 @@ const properties: INodeProperties[] = [
 				displayName: 'chatId',
 				name: 'chatId',
 				type: 'string',
+				placeholder: '79000000000@c.us',
 				default: '',
 				displayOptions: {
 					show: {
@@ -192,6 +194,7 @@ const properties: INodeProperties[] = [
             {
 				displayName: 'chatId',
 				name: 'chatId',
+				placeholder: '79000000000@c.us',
 				type: 'string',
 				default: '',
 				displayOptions: {
@@ -211,6 +214,7 @@ const properties: INodeProperties[] = [
 				displayName: 'chatId',
 				name: 'chatId',
 				type: 'string',
+				placeholder: '79000000000@c.us',
 				default: '',
 				displayOptions: {
 					show: {
@@ -228,6 +232,7 @@ const properties: INodeProperties[] = [
              {
 				displayName: 'phoneNumber',
 				name: 'phoneNumber',
+				placeholder: '79000000000',
 				type: 'string',
 				default: '',
 				displayOptions: {
@@ -241,7 +246,7 @@ const properties: INodeProperties[] = [
 					},
 				},
 				required: true,
-				description: 'Recipients phone number in international format: 11 or 12 digits; Example: 79876543210 or 380123456789',
+				description: 'Recipients phone number in international format: 11 or 12 digits; Example: 79876543210 or 380123456789', //
 			},
 			{
 				displayName: 'message',
@@ -261,6 +266,7 @@ const properties: INodeProperties[] = [
 				name: 'fileName',
 				type: 'string',
 				default: '',
+				placeholder: 'image.jpg',
 				required: true,
 				description: 'fileName',
 				displayOptions: {
@@ -274,6 +280,7 @@ const properties: INodeProperties[] = [
 				name: 'urlFile',
 				type: 'string',
 				default: '',
+				placeholder: 'https://avatars.githubusercontent.com/u/65014206?s=200&v=4',
 				required: true,
 				description: 'urlFile',
 				displayOptions: {
@@ -441,7 +448,7 @@ const properties: INodeProperties[] = [
 								name: 'buttonText',
 								type: 'string',
 								default: '',
-								placeholder: 'First Button',
+								placeholder: 'TEXT',
 							},
 							{
 								displayName: 'Url',
@@ -461,14 +468,14 @@ const properties: INodeProperties[] = [
 								name: 'buttonText',
 								type: 'string',
 								default: '',
-								placeholder: 'First Button',
+								placeholder: 'TEXT',
 							},
 							{
 								displayName: 'phoneNumber',
 								name: 'phoneNumber',
 								type: 'string',
 								default: '',
-								placeholder: '79306007220',
+								placeholder: '79000000000',
 							},
 						],
 					},
