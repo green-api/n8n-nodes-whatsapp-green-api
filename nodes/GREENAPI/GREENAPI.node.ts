@@ -18,9 +18,6 @@ import { lastIncomingMessages } from './operations/lastIncomingMessages';
 import { getGroupData } from './operations/getGroupData';
 import { sendInteractiveButtons } from './operations/sendInteractiveButtons';
 import { sendInteractiveButtonsReply } from './operations/sendInteractiveButtonsReply';
-//declare const console: any;
-
-
 
 export class GREENAPI implements INodeType {
 	description: INodeTypeDescription = {
@@ -29,7 +26,7 @@ export class GREENAPI implements INodeType {
 		icon: 'file:greenapi.svg',
 		group: ['transform'],
 		version: 1,
-		description: 'Node description', /// ##### !!!!!!!!
+		description: 'Send and receive WhatsApp messages using Green-API.',
  		defaults: {
 			name: 'GREENAPI',
 		},
