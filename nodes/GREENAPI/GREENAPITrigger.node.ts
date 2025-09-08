@@ -1,7 +1,6 @@
 import type {
 	IHookFunctions,
 	IWebhookFunctions,
-	//IDataObject,
 	INodeType,
 	INodeTypeDescription,
 	IWebhookResponseData,
@@ -16,8 +15,7 @@ export class GREENAPITrigger implements INodeType {
 		icon: 'file:greenapi.svg',
 		group: ['trigger'],
 		version: 1,
-		//subtitle: '=Updates: {{$parameter["updates"].join(", ")}}', // это что вообще??
-		description: 'Starts the workflow on a Telegram update', // tElEgRaM7?
+		description: 'Starts the workflow on a Green-Api webhook',
 		defaults: {
 			name: 'GREENAPI Trigger',
 		},
@@ -40,15 +38,15 @@ export class GREENAPITrigger implements INodeType {
 		properties: [
 			{
 				displayName:
-					'Due to Telegram API limitations, you can use just one Telegram trigger for each bot at a time', // tElEgRaM7?
-				name: 'telegramTriggerNotice', //
-				type: 'notice', //
-				default: '', //
+					'Applying the settings, which is necessary for trigger node to work, to an instance can take up to 5 minutes.',
+				name: 'GreenApiTriggerNotice',
+				type: 'notice',
+				default: '',
 			},
 			{
 				displayName: 'Trigger On',
 				name: 'webhookType',
-				hint: 'if none is chosen, all types will be processed',// как будто не очень звучит
+				hint: 'Types of processed webhooks. All types will be processed if none is selected.',
 				type: 'multiOptions',
 				options: [
 					{
@@ -72,40 +70,33 @@ export class GREENAPITrigger implements INodeType {
 				default: 'incomingMessageReceived',
 			},
 			{
-				displayName: 'Receiving from',
+				displayName: 'Restrictions on receiving',
 				name: 'chatType',
-				hint: 'if none is chosen, all types will be processed',//!!!!
+				hint: 'Process webhooks based on messages from personal/group chats only.',
 				type: 'options',
 				options: [
 					{
 						name: 'Receive all',
 						value: 'noReceiveRestriction',
-						description: 'Trigger on new sent message status', //
+						description: 'Process webhooks from all chats.',
 					},
 					{
 						name: 'Only from chats',
 						value: 'chatReceiveRestriction',
-						description: 'Trigger on new incoming message', //
+						description: 'Process webhooks only from personal chats.',
 					},
 					{
 						name: 'Only from groups',
 						value: 'groupReceiveRestriction',
-						description:
-							'Trigger on new outgoing message sent from phone', //
+						description:'Process webhooks only from group chats.',
 					},
 				],
 				required: true,
 				default: 'noReceiveRestriction',
 			},
-			{
-				displayName:
-					'Every uploaded attachment, even if sent in a group, will trigger a separate event. You can identify that an attachment belongs to a certain group by <code>media_group_id</code> .',
-				name: 'attachmentNotice', //
-				type: 'notice', //
-				default: '', //
-			},
             {
 				displayName: 'Restrict to Chat IDs',
+				hint: 'Process webhooks only from the specified chats.',
 				name: 'chatIds',
 				type: 'fixedCollection',
 				placeholder: 'Add chatId',
