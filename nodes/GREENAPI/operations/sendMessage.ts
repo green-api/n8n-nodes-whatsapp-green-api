@@ -6,6 +6,8 @@ export async function sendMessage(this: IExecuteFunctions, items: INodeExecution
 	for (let i = 0; i < items.length; i++) {
 		const chatId = this.getNodeParameter('chatId', i, '') as string;
 		const message = this.getNodeParameter('message', i, '') as string;
+		const quotedMessageId = this.getNodeParameter('quotedMessageId', i, '') as string;
+		//const typingTime = this.getNodeParameter('typingTime', i, '') as number;
 		const credentials = await this.getCredentials('GreenApiAuth') as {
 			idInstance: string;
 			apiTokenKey: string;
@@ -18,6 +20,8 @@ export async function sendMessage(this: IExecuteFunctions, items: INodeExecution
 			body: {
                     'chatId': chatId,
                     'message': message,
+					'quotedMessageId': quotedMessageId,
+					//'typingTime': typingTime,
                 },
 			json: true,
 		});

@@ -280,7 +280,7 @@ const properties: INodeProperties[] = [
 				name: 'urlFile',
 				type: 'string',
 				default: '',
-				placeholder: 'https://avatars.githubusercontent.com/u/65014206?s=200&v=4',
+				placeholder: 'https://my.site.com/my/image.jpg',
 				required: true,
 				description: 'urlFile',
 				displayOptions: {
@@ -339,13 +339,14 @@ const properties: INodeProperties[] = [
 				default: '',
 				required: false,
 				description: 'quotedMessageId',
+				placeholder: '(optional)',
 				displayOptions: {
 					show: {
-						operation: ['sendPoll'],
+						operation: ['sendMessage', 'sendFileByUrl','sendPoll', 'sendInteractiveButtons', 'sendInteractiveButtonsReply'],
 					},
 				},
 			},
-			{
+			/*{
 				displayName: 'typingTime',
 				name: 'typingTime',
 				type: 'number',
@@ -357,13 +358,14 @@ const properties: INodeProperties[] = [
 						operation: ['sendPoll'],
 					},
 				},
-			},
+			},*/
 			{
 				displayName: 'header',
 				name: 'header',
 				type: 'string',
 				default: '',
 				required: true,
+				placeholder: 'Header',
 				description: 'Message title',
 				displayOptions: {
 					show: {
@@ -375,6 +377,7 @@ const properties: INodeProperties[] = [
 				displayName: 'body',
 				name: 'body',
 				type: 'string',
+				placeholder: 'Body',
 				default: '',
 				required: true,
 				description: 'Message text. Emoji symbols are supported 😃',
@@ -388,6 +391,7 @@ const properties: INodeProperties[] = [
 				displayName: 'footer',
 				name: 'footer',
 				type: 'string',
+				placeholder: 'Footer',
 				default: '',
 				required: true,
 				description: 'Message footer. Convenient for visually highlighting text that relates to buttons',
@@ -416,7 +420,7 @@ const properties: INodeProperties[] = [
 								name: 'buttonText',
 								type: 'string',
 								default: '',
-								placeholder: 'First Button',
+								placeholder: 'Reply text',
 							},
 						],
 					},
@@ -488,7 +492,7 @@ const properties: INodeProperties[] = [
 								name: 'buttonText',
 								type: 'string',
 								default: '',
-								placeholder: 'First Button',
+								placeholder: 'TEXT',
 							},
 							{
 								displayName: 'copyCode',
@@ -511,9 +515,10 @@ const properties: INodeProperties[] = [
 				name: 'minutes',
 				type: 'string',
 				default: '',
-				/// тут ограничить до 20160 наверн
 				required: false,
 				description: 'minutes',
+				/// #### тут ограничить до 20160 можно
+				placeholder: '(1440 minutes is default)',
 				displayOptions: {
 					show: {
 						operation: ['lastIncomingMessages', 'lastOutgoingMessages'],

@@ -18,6 +18,8 @@ export async function sendInteractiveButtonsReply(this: IExecuteFunctions, items
         const footer = this.getNodeParameter('footer', i, '') as string;
         const buttonsRaw = this.getNodeParameter('buttons', i, { button: [] }) as { button: { buttonText: string }[] };
         const buttons = transformButtonsSimple(buttonsRaw);
+        const quotedMessageId = this.getNodeParameter('quotedMessageId', i, '') as string;
+		//const typingTime = this.getNodeParameter('typingTime', i, '') as number;
         const credentials = await this.getCredentials('GreenApiAuth') as {
             idInstance: string;
             apiTokenKey: string;
@@ -34,7 +36,9 @@ export async function sendInteractiveButtonsReply(this: IExecuteFunctions, items
                 'header': header,
                 'body': body,
                 'footer': footer,
-                'buttons': buttons
+                'buttons': buttons,
+                'quotedMessageId': quotedMessageId,
+				//'typingTime': typingTime,
             },
             json: true,
         });

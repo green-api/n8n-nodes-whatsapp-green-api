@@ -46,6 +46,8 @@ export async function sendInteractiveButtons(this: IExecuteFunctions, items: INo
         const header = this.getNodeParameter('header', i, '') as string;
         const body = this.getNodeParameter('body', i, '') as string;
         const footer = this.getNodeParameter('footer', i, '') as string;
+        const quotedMessageId = this.getNodeParameter('quotedMessageId', i, '') as string;
+		//const typingTime = this.getNodeParameter('typingTime', i, '') as number;
         const buttonsRaw = this.getNodeParameter('buttons', i, {}) as {
             button?: { type: string, buttonId: string, buttonText: string, copycode?: string, phoneNumber?: string, url?: string}[];
         };
@@ -66,7 +68,9 @@ export async function sendInteractiveButtons(this: IExecuteFunctions, items: INo
                 'header': header,
                 'body': body,
                 'footer': footer,
-                'buttons': buttons
+                'buttons': buttons,
+                'quotedMessageId': quotedMessageId,
+				//'typingTime': typingTime,
             },
             json: true,
         });

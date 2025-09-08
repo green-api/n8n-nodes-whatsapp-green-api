@@ -12,7 +12,7 @@ export async function sendPoll(this: IExecuteFunctions, items: INodeExecutionDat
         const options = optsRaw.option || [];
         const multipleAnswers = this.getNodeParameter('multipleAnswers', i, '') as boolean;
         const quotedMessageId = this.getNodeParameter('quotedMessageId', i, '') as string;
-        const typingTime = this.getNodeParameter('typingTime', i, '') as number;
+        //const typingTime = this.getNodeParameter('typingTime', i, '') as number;
         const credentials = await this.getCredentials('GreenApiAuth') as {
             idInstance: string;
             apiTokenKey: string;
@@ -28,7 +28,7 @@ export async function sendPoll(this: IExecuteFunctions, items: INodeExecutionDat
                 'options': options,
                 'multipleAnswers': multipleAnswers,
                 'quotedMessageId': quotedMessageId,
-                'typingTime': typingTime,
+                //'typingTime': typingTime,
             },
             json: true,
         });

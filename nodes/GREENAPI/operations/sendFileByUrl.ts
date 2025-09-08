@@ -7,6 +7,8 @@ export async function sendFileByUrl(this: IExecuteFunctions, items: INodeExecuti
         const chatId = this.getNodeParameter('chatId', i, '') as string;
         const fileName = this.getNodeParameter('fileName', i, '') as string;
         const urlFile = this.getNodeParameter('urlFile', i, '') as string;
+        const quotedMessageId = this.getNodeParameter('quotedMessageId', i, '') as string;
+		//const typingTime = this.getNodeParameter('typingTime', i, '') as number;
         const credentials = await this.getCredentials('GreenApiAuth') as {
             idInstance: string;
             apiTokenKey: string;
@@ -20,6 +22,8 @@ export async function sendFileByUrl(this: IExecuteFunctions, items: INodeExecuti
                 'chatId': chatId,
                 'fileName': fileName,
                 'urlFile': urlFile,
+                'quotedMessageId': quotedMessageId,
+				//'typingTime': typingTime,
             },
             json: true,
         });
