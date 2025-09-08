@@ -34,8 +34,7 @@
     ],
     "nodes": [
       "dist/nodes/GREENAPI/GREENAPI.node.js",
-      "dist/nodes/GREENAPI/GREENAPITrigger.node.js",
-      "dist/nodes/GREENAPI/greenapitest.node.js"
+      "dist/nodes/GREENAPI/GREENAPITrigger.node.js"
     ]
   },
   "devDependencies": {
