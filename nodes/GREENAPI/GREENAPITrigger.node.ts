@@ -18,6 +18,7 @@ export class GREENAPITrigger implements INodeType {
 		description: 'Starts the workflow on a Green-Api webhook',
 		defaults: {
 			name: 'GREENAPI Trigger',
+			color: 'green',
 		},
 		inputs: [],
 		outputs: [NodeConnectionType.Main],
@@ -121,6 +122,7 @@ export class GREENAPITrigger implements INodeType {
 				],
 			},
 		],
+		
 	};
 
 
@@ -128,7 +130,6 @@ export class GREENAPITrigger implements INodeType {
         default: {
 
             async checkExists(this: IHookFunctions): Promise<boolean> {
-                console.log('>>> [MyApiTrigger] CHECKEXISTS called!');
                 const credentials = await this.getCredentials('GreenApiAuth');
                 const webhookUrl = this.getNodeWebhookUrl('default');
 				console.log(webhookUrl);
@@ -141,7 +142,6 @@ export class GREENAPITrigger implements INodeType {
             },
 
             async create(this: IHookFunctions): Promise<void> {
-				console.log('>>> [MyApiTrigger] CREATE called!');
                 const credentials = await this.getCredentials('GreenApiAuth');  
 				const webhookUrl = this.getNodeWebhookUrl('default');
                 
@@ -159,7 +159,6 @@ export class GREENAPITrigger implements INodeType {
             },
 
 			async delete(this: IHookFunctions): Promise<void> { 
-				console.log('>>> [MyApiTrigger] DELETE called!');
                 const credentials = await this.getCredentials('GreenApiAuth');
                 
                 await this.helpers.request({

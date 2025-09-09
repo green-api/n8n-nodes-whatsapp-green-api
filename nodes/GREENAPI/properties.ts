@@ -364,7 +364,7 @@ const properties: INodeProperties[] = [
 				name: 'header',
 				type: 'string',
 				default: '',
-				required: true,
+				required: false,
 				placeholder: 'Header',
 				description: 'Message title',
 				displayOptions: {
@@ -393,7 +393,7 @@ const properties: INodeProperties[] = [
 				type: 'string',
 				placeholder: 'Footer',
 				default: '',
-				required: true,
+				required: false,
 				description: 'Message footer. Convenient for visually highlighting text that relates to buttons',
 				displayOptions: {
 					show: {
@@ -517,8 +517,7 @@ const properties: INodeProperties[] = [
 				default: '',
 				required: false,
 				description: 'minutes',
-				/// #### тут ограничить до 20160 можно
-				placeholder: '(1440 minutes is default)',
+				placeholder: '(1440 minutes by default)',
 				displayOptions: {
 					show: {
 						operation: ['lastIncomingMessages', 'lastOutgoingMessages'],

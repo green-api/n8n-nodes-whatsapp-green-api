@@ -9,9 +9,9 @@ declare const console: any;
 
 export class GreenApiAuth implements ICredentialType {
 	name = 'GreenApiAuth';
-	displayName = 'Green-API Credentials';
+	displayName = 'Green-API';
 
-	documentationUrl = 'https://green-api.com/en/docs';
+	documentationUrl = 'https://green-api.com/en/docs/api';
 
 	properties: INodeProperties[] = [
 		{
@@ -39,7 +39,7 @@ export class GreenApiAuth implements ICredentialType {
 			url: '={{$baseURL}}/waInstance{{$credentials.idInstance}}/getStateInstance/{{$credentials.apiTokenKey}}',
 			method: 'GET',
 		},
-		rules: [ // прописать все случаи expired, deleted
+		rules: [
 			{
 				type: 'responseSuccessBody',
 				properties: {
