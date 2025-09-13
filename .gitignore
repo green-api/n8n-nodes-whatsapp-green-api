@@ -10,3 +10,5 @@ nodes/greenapitest.node.ts
 .env
 *.tsbuildinfo
 .vscode/
+.vscode
+*.code-workspace
