@@ -13,4 +13,3 @@ nodes/greenapitest.node.ts
 .vscode
 *.code-workspace
 nodes/GREENAPI/greenapitest.node.ts
-.vscode/
