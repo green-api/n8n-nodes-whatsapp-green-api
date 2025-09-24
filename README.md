@@ -7,10 +7,9 @@ The node allows integration with Green API for sending WhatsApp messages and lis
 It provides the following resources:
 
 - **Messages**: send text messages, media messages, polls, and button messages  
-- **Logs**: retrieve the history of incoming and outgoing messages, as well as chat history  
+- **Journals**: retrieve the history of incoming and outgoing messages, as well as chat history  
 - **Contacts**: get the list of contacts, group participants, and check if a phone number is registered on WhatsApp  
 - **Trigger**: listen to incoming webhooks with advanced filters  
-
 
 ## More information
 
