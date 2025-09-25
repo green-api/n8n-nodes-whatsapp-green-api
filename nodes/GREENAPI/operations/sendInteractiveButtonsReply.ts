@@ -20,7 +20,7 @@ export async function sendInteractiveButtonsReply(this: IExecuteFunctions, items
         const buttons = transformButtonsSimple(buttonsRaw);
         const quotedMessageId = this.getNodeParameter('quotedMessageId', i, '') as string;
 		//const typingTime = this.getNodeParameter('typingTime', i, '') as number;
-        const credentials = await this.getCredentials('GreenApiAuthApi') as {
+        const credentials = await this.getCredentials('greenApiAuthApi') as {
             idInstance: string;
             apiTokenKey: string;
         };

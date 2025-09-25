@@ -5,7 +5,7 @@ export async function getChatHistory(this: IExecuteFunctions, items: INodeExecut
 
     for (let i = 0; i < items.length; i++) {
         const chatId = this.getNodeParameter('chatId', i, '') as string;
-        const credentials = await this.getCredentials('GreenApiAuthApi') as {
+        const credentials = await this.getCredentials('greenApiAuthApi') as {
             idInstance: string;
             apiTokenKey: string;
         };

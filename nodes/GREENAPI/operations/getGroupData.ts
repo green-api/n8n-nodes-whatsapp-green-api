@@ -5,7 +5,7 @@ export async function getGroupData(this: IExecuteFunctions, items: INodeExecutio
 
     for (let i = 0; i < items.length; i++) {
         const groupId = this.getNodeParameter('groupId', i, '') as string;
-        const credentials = await this.getCredentials('GreenApiAuthApi') as {
+        const credentials = await this.getCredentials('greenApiAuthApi') as {
             idInstance: string;
             apiTokenKey: string;
         };

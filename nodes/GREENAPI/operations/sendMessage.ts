@@ -8,7 +8,7 @@ export async function sendMessage(this: IExecuteFunctions, items: INodeExecution
 		const message = this.getNodeParameter('message', i, '') as string;
 		const quotedMessageId = this.getNodeParameter('quotedMessageId', i, '') as string;
 		//const typingTime = this.getNodeParameter('typingTime', i, '') as number;
-		const credentials = await this.getCredentials('GreenApiAuthApi') as {
+		const credentials = await this.getCredentials('greenApiAuthApi') as {
 			idInstance: string;
 			apiTokenKey: string;
 		};

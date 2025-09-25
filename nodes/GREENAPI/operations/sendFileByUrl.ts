@@ -9,7 +9,7 @@ export async function sendFileByUrl(this: IExecuteFunctions, items: INodeExecuti
         const urlFile = this.getNodeParameter('urlFile', i, '') as string;
         const quotedMessageId = this.getNodeParameter('quotedMessageId', i, '') as string;
 		//const typingTime = this.getNodeParameter('typingTime', i, '') as number;
-        const credentials = await this.getCredentials('GreenApiAuthApi') as {
+        const credentials = await this.getCredentials('greenApiAuthApi') as {
             idInstance: string;
             apiTokenKey: string;
         };

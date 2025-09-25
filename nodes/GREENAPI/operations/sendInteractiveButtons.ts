@@ -52,7 +52,7 @@ export async function sendInteractiveButtons(this: IExecuteFunctions, items: INo
             button?: { type: string, buttonId: string, buttonText: string, copycode?: string, phoneNumber?: string, url?: string}[];
         };
         const buttons = transformButtons(buttonsRaw);
-        const credentials = await this.getCredentials('GreenApiAuthApi') as {
+        const credentials = await this.getCredentials('greenApiAuthApi') as {
             idInstance: string;
             apiTokenKey: string;
         };

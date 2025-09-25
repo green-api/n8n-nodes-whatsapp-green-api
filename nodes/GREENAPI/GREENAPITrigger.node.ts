@@ -24,7 +24,7 @@ export class GREENAPITrigger implements INodeType {
 		outputs: [NodeConnectionType.Main],
 		credentials: [
 			{
-				name: 'GreenApiAuthApi',
+				name: 'greenApiAuthApi',
 				required: true,
 			},
 		],
@@ -130,7 +130,7 @@ export class GREENAPITrigger implements INodeType {
         default: {
 
             async checkExists(this: IHookFunctions): Promise<boolean> {
-                const credentials = await this.getCredentials('GreenApiAuthApi');
+                const credentials = await this.getCredentials('greenApiAuthApi');
                 const webhookUrl = this.getNodeWebhookUrl('default');
 				console.log(webhookUrl);
 
@@ -142,7 +142,7 @@ export class GREENAPITrigger implements INodeType {
             },
 
             async create(this: IHookFunctions): Promise<void> {
-                const credentials = await this.getCredentials('GreenApiAuthApi');  
+                const credentials = await this.getCredentials('greenApiAuthApi');  
 				const webhookUrl = this.getNodeWebhookUrl('default');
                 
                 await this.helpers.request({
@@ -159,7 +159,7 @@ export class GREENAPITrigger implements INodeType {
             },
 
 			async delete(this: IHookFunctions): Promise<void> { 
-                const credentials = await this.getCredentials('GreenApiAuthApi');
+                const credentials = await this.getCredentials('greenApiAuthApi');
                 
                 await this.helpers.request({
                     method: 'POST',

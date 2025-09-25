@@ -35,7 +35,7 @@ export class GREENAPI implements INodeType {
 		usableAsTool: true,
 		credentials: [
 			{
-				name: 'GreenApiAuthApi',
+				name: 'greenApiAuthApi',
 				required: true,
 			},
 		],

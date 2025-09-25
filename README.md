@@ -13,7 +13,13 @@ It provides the following resources:
 
 ## More information
 
-Please refer to the GREEN-API documentation at [https://green-api.com/en/docs/](https://green-api.com/en/docs/).
+- Please refer to the GREEN-API documentation at [https://green-api.com/en/docs/](https://green-api.com/en/docs/)
+
+- To connect an instance, it must be authorized. You can authorize the instance in your Green-API console
+
+- To enable triggers, specify *WEBHOOK_URL* in the .env file
+
+- If you notice any issues with the integration, please report them to Green-API support
 
 ## License
 

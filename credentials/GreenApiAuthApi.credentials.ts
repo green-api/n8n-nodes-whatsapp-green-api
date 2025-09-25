@@ -8,7 +8,7 @@ declare const console: any;
 
 
 export class GreenApiAuthApi implements ICredentialType {
-	name = 'GreenApiAuthApi';
+	name = 'greenApiAuthApi';
 	displayName = 'Green-API API';
 
 	documentationUrl = 'https://green-api.com/en/docs/api';
