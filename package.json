@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-greenapi",
-  "version": "0.1.0",
+  "version": "0.1.0rc2",
   "description": "n8n node for Green-API for WhatsApp",
   "keywords": [
     "n8n-community-node-package",
@@ -18,7 +18,7 @@
     "type": "git",
     "url": "https://github.com/nostalgiaCode/n8n-nodes-greenapi.git"
   },
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc && gulp build:icons",
     "dev": "tsc --watch",
