@@ -7,19 +7,19 @@ const properties: INodeProperties[] = [
 				type: 'options',
 				options: [
 					{
-						name: 'sending',
+						name: 'Sending',
 						value: 'sending',
 					},
 					{
-						name: 'journal',
+						name: 'Journal',
 						value: 'journal',
 					},
                     {
-                        name: 'service',
+                        name: 'Service',
                         value: 'service',
                     },
                     {
-                        name: 'group',
+                        name: 'Group',
                         value: 'group',
                     },
 				],
@@ -31,6 +31,7 @@ const properties: INodeProperties[] = [
 				displayName: 'Operation',
 				name: 'operation',
 				type: 'options',
+				noDataExpression: true,
 				displayOptions: {
 					show: {
 						resource: [
@@ -40,34 +41,29 @@ const properties: INodeProperties[] = [
 				},
 				options: [
 					{
-						name: 'sendMessage',
-						value: 'sendMessage',
-						description: 'sendMessage',
-						action: 'sendMessage'
-					},
-					{
 						name: 'sendFileByUrl',
 						value: 'sendFileByUrl',
-						description: 'sendFileByUrl',
-						action: 'sendFileByUrl'
-					},
-					{
-						name: 'sendPoll',
-						value: 'sendPoll',
-						description: 'sendPoll',
-						action: 'sendPoll'
-					},
-					{
-						name: 'sendInteractiveButtonsReply',
-						value: 'sendInteractiveButtonsReply',
-						description: 'sendInteractiveButtonsReply',
-						action: 'sendInteractiveButtonsReply'
+						action: 'Send file by url'
 					},
 					{
 						name: 'sendInteractiveButtons',
 						value: 'sendInteractiveButtons',
-						description: 'sendInteractiveButtons',
-						action: 'sendInteractiveButtons'
+						action: 'Send interactive buttons'
+					},
+					{
+						name: 'sendInteractiveButtonsReply',
+						value: 'sendInteractiveButtonsReply',
+						action: 'Send interactive buttons reply'
+					},
+					{
+						name: 'sendMessage',
+						value: 'sendMessage',
+						action: 'Send message'
+					},
+					{
+						name: 'sendPoll',
+						value: 'sendPoll',
+						action: 'Send poll'
 					}
 				],
 				default: 'sendMessage',
@@ -76,6 +72,7 @@ const properties: INodeProperties[] = [
 				displayName: 'Operation',
 				name: 'operation',
 				type: 'options',
+				noDataExpression: true,
 				displayOptions: {
 					show: {
 						resource: [
@@ -87,20 +84,20 @@ const properties: INodeProperties[] = [
 					{
 						name: 'getChatHistory',
 						value: 'getChatHistory',
-						description: 'getChatHistory',
-						action: 'getChatHistory'
+
+						action: 'Get chat history'
 					},
                     {
 						name: 'lastIncomingMessages',
 						value: 'lastIncomingMessages',
-						description: 'lastIncomingMessages',
-						action: 'lastIncomingMessages'
+
+						action: 'Last incoming messages'
 					},
                     {
 						name: 'lastOutgoingMessages',
 						value: 'lastOutgoingMessages',
-						description: 'lastOutgoingMessages',
-						action: 'lastOutgoingMessages'
+
+						action: 'Last outgoing messages'
 					}
 				],
 				default: 'getChatHistory',
@@ -109,6 +106,7 @@ const properties: INodeProperties[] = [
 				displayName: 'Operation',
 				name: 'operation',
 				type: 'options',
+				noDataExpression: true,
 				displayOptions: {
 					show: {
 						resource: [
@@ -120,20 +118,20 @@ const properties: INodeProperties[] = [
 					{
 						name: 'getContacts',
 						value: 'getContacts',
-						description: 'getContacts',
-						action: 'getContacts'
+
+						action: 'Get contacts'
 					},
                     {
 						name: 'getAvatar',
 						value: 'getAvatar',
-						description: 'getAvatar',
-						action: 'getAvatar'
+
+						action: 'Get avatar'
 					},
                     {
 						name: 'checkWhatsapp',
 						value: 'checkWhatsapp',
-						description: 'checkWhatsapp',
-						action: 'checkWhatsapp'
+
+						action: 'Check whatsapp'
 					}
 				],
 				default: 'getContacts',
@@ -142,6 +140,7 @@ const properties: INodeProperties[] = [
 				displayName: 'Operation',
 				name: 'operation',
 				type: 'options',
+				noDataExpression: true,
 				displayOptions: {
 					show: {
 						resource: [
@@ -153,8 +152,8 @@ const properties: INodeProperties[] = [
 					{
 						name: 'getGroupData',
 						value: 'getGroupData',
-						description: 'getGroupData',
-						action: 'getGroupData'
+
+						action: 'Get group data'
 					}
 				],
 				default: 'getGroupData',
@@ -173,7 +172,7 @@ const properties: INodeProperties[] = [
 					},
 				},
 				required: true,
-				description: 'groupId',
+
 			},
 			{
 				displayName: 'chatId',
@@ -189,7 +188,7 @@ const properties: INodeProperties[] = [
 					},
 				},
 				required: true,
-				description: 'chatId',
+
 			},
             {
 				displayName: 'chatId',
@@ -208,7 +207,7 @@ const properties: INodeProperties[] = [
 					},
 				},
 				required: true,
-				description: 'chatId',
+
 			},
             {
 				displayName: 'chatId',
@@ -227,7 +226,7 @@ const properties: INodeProperties[] = [
 					},
 				},
 				required: true,
-				description: 'chatId',
+
 			},
              {
 				displayName: 'phoneNumber',
@@ -249,12 +248,12 @@ const properties: INodeProperties[] = [
 				description: 'Recipients phone number in international format: 11 or 12 digits; Example: 79876543210 or 380123456789', //
 			},
 			{
-				displayName: 'message',
+				displayName: 'Message',
 				name: 'message',
 				type: 'string',
 				default: '',
 				required: true,
-				description: 'message',
+
 				displayOptions: {
 					show: {
 						operation: ['sendMessage', 'sendPoll'],
@@ -268,7 +267,7 @@ const properties: INodeProperties[] = [
 				default: '',
 				placeholder: 'image.jpg',
 				required: true,
-				description: 'fileName',
+
 				displayOptions: {
 					show: {
 						operation: ['sendFileByUrl'],
@@ -282,7 +281,7 @@ const properties: INodeProperties[] = [
 				default: '',
 				placeholder: 'https://my.site.com/my/image.jpg',
 				required: true,
-				description: 'urlFile',
+
 				displayOptions: {
 					show: {
 						operation: ['sendFileByUrl'],
@@ -325,7 +324,7 @@ const properties: INodeProperties[] = [
 				type: 'boolean',
 				default: false,
 				required: true,
-				description: 'multipleAnswers',
+
 				displayOptions: {
 					show: {
 						operation: ['sendPoll'],
@@ -337,8 +336,8 @@ const properties: INodeProperties[] = [
 				name: 'quotedMessageId',
 				type: 'string',
 				default: '',
-				required: false,
-				description: 'quotedMessageId',
+
+
 				placeholder: '(optional)',
 				displayOptions: {
 					show: {
@@ -360,11 +359,11 @@ const properties: INodeProperties[] = [
 				},
 			},*/
 			{
-				displayName: 'header',
+				displayName: 'Header',
 				name: 'header',
 				type: 'string',
 				default: '',
-				required: false,
+
 				placeholder: 'Header',
 				description: 'Message title',
 				displayOptions: {
@@ -374,13 +373,13 @@ const properties: INodeProperties[] = [
 				},
 			},
 			{
-				displayName: 'body',
+				displayName: 'Body',
 				name: 'body',
 				type: 'string',
 				placeholder: 'Body',
 				default: '',
 				required: true,
-				description: 'Message text. Emoji symbols are supported 😃',
+				description: 'Message text. Emoji symbols are supported 😃.',
 				displayOptions: {
 					show: {
 						operation: ['sendInteractiveButtonsReply', 'sendInteractiveButtons'],
@@ -388,13 +387,13 @@ const properties: INodeProperties[] = [
 				},
 			},
 			{
-				displayName: 'footer',
+				displayName: 'Footer',
 				name: 'footer',
 				type: 'string',
 				placeholder: 'Footer',
 				default: '',
-				required: false,
-				description: 'Message footer. Convenient for visually highlighting text that relates to buttons',
+
+				description: 'Message footer. Convenient for visually highlighting text that relates to buttons.',
 				displayOptions: {
 					show: {
 						operation: ['sendInteractiveButtonsReply', 'sendInteractiveButtons'],
@@ -416,7 +415,7 @@ const properties: INodeProperties[] = [
 						name: 'button',
 						values: [
 							{
-								displayName: 'Text on the button',
+								displayName: 'Text on the Button',
 								name: 'buttonText',
 								type: 'string',
 								default: '',
@@ -448,7 +447,7 @@ const properties: INodeProperties[] = [
 						name: 'buttonUrl',
 						values: [
 							{
-								displayName: 'Text on the button',
+								displayName: 'Text on the Button',
 								name: 'buttonText',
 								type: 'string',
 								default: '',
@@ -468,7 +467,7 @@ const properties: INodeProperties[] = [
 						name: 'buttonCall',
 						values: [
 							{
-								displayName: 'Text on the button',
+								displayName: 'Text on the Button',
 								name: 'buttonText',
 								type: 'string',
 								default: '',
@@ -488,7 +487,7 @@ const properties: INodeProperties[] = [
 						name: 'buttonCopy',
 						values: [
 							{
-								displayName: 'Text on the button',
+								displayName: 'Text on the Button',
 								name: 'buttonText',
 								type: 'string',
 								default: '',
@@ -511,12 +510,12 @@ const properties: INodeProperties[] = [
 				},
 			},
             {
-				displayName: 'minutes',
+				displayName: 'Minutes',
 				name: 'minutes',
 				type: 'string',
 				default: '',
-				required: false,
-				description: 'minutes',
+
+
 				placeholder: '(1440 minutes by default)',
 				displayOptions: {
 					show: {

@@ -7,9 +7,9 @@ import {
 declare const console: any;
 
 
-export class GreenApiAuth implements ICredentialType {
-	name = 'GreenApiAuth';
-	displayName = 'Green-API';
+export class GreenApiAuthApi implements ICredentialType {
+	name = 'GreenApiAuthApi';
+	displayName = 'Green-API API';
 
 	documentationUrl = 'https://green-api.com/en/docs/api';
 

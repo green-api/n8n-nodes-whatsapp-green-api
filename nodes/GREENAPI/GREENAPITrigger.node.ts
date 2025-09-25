@@ -11,20 +11,20 @@ declare const console: any;
 export class GREENAPITrigger implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'GREENAPI Trigger',
-		name: 'GREENAPITrigger',
+		name: 'greenapiTrigger',
 		icon: 'file:greenapi.svg',
 		group: ['trigger'],
 		version: 1,
 		description: 'Starts the workflow on a Green-Api webhook',
 		defaults: {
 			name: 'GREENAPI Trigger',
-			color: 'green',
+
 		},
 		inputs: [],
 		outputs: [NodeConnectionType.Main],
 		credentials: [
 			{
-				name: 'GreenApiAuth',
+				name: 'GreenApiAuthApi',
 				required: true,
 			},
 		],
@@ -51,45 +51,45 @@ export class GREENAPITrigger implements INodeType {
 				type: 'multiOptions',
 				options: [
 					{
-						name: 'Incoming message',
+						name: 'Incoming Message',
 						value: 'incomingMessageReceived',
 						description: 'Trigger on new incoming message',
 					},
 					{
-						name: 'Outgoing message sent from phone',
+						name: 'Outgoing Message Sent From Phone',
 						value: 'outgoingMessageReceived',
 						description:
 							'Trigger on new outgoing message sent from phone',
 					},
 					{
-						name: 'outgoing message sent from API',
+						name: 'Outgoing Message Sent From API',
 						value: 'outgoingAPIMessageReceived',
 						description: 'Trigger on new outgoing message sent from API',
 					},
 				],
-				required: false,
-				default: 'incomingMessageReceived',
+
+				default: [],
 			},
 			{
-				displayName: 'Restrictions on receiving',
+				displayName: 'Restrictions on Receiving',
 				name: 'chatType',
 				hint: 'Process webhooks based on messages from personal/group chats only.',
 				type: 'options',
 				options: [
 					{
-						name: 'Receive all',
+						name: 'Receive All',
 						value: 'noReceiveRestriction',
-						description: 'Process webhooks from all chats.',
+						description: 'Process webhooks from all chats',
 					},
 					{
-						name: 'Only from chats',
+						name: 'Only From Chats',
 						value: 'chatReceiveRestriction',
-						description: 'Process webhooks only from personal chats.',
+						description: 'Process webhooks only from personal chats',
 					},
 					{
-						name: 'Only from groups',
+						name: 'Only From Groups',
 						value: 'groupReceiveRestriction',
-						description:'Process webhooks only from group chats.',
+						description: 'Process webhooks only from group chats',
 					},
 				],
 				required: true,
@@ -130,7 +130,7 @@ export class GREENAPITrigger implements INodeType {
         default: {
 
             async checkExists(this: IHookFunctions): Promise<boolean> {
-                const credentials = await this.getCredentials('GreenApiAuth');
+                const credentials = await this.getCredentials('GreenApiAuthApi');
                 const webhookUrl = this.getNodeWebhookUrl('default');
 				console.log(webhookUrl);
 
@@ -142,7 +142,7 @@ export class GREENAPITrigger implements INodeType {
             },
 
             async create(this: IHookFunctions): Promise<void> {
-                const credentials = await this.getCredentials('GreenApiAuth');  
+                const credentials = await this.getCredentials('GreenApiAuthApi');  
 				const webhookUrl = this.getNodeWebhookUrl('default');
                 
                 await this.helpers.request({
@@ -159,7 +159,7 @@ export class GREENAPITrigger implements INodeType {
             },
 
 			async delete(this: IHookFunctions): Promise<void> { 
-                const credentials = await this.getCredentials('GreenApiAuth');
+                const credentials = await this.getCredentials('GreenApiAuthApi');
                 
                 await this.helpers.request({
                     method: 'POST',

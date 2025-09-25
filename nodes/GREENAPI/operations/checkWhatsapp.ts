@@ -5,7 +5,7 @@ export async function checkWhatsapp(this: IExecuteFunctions, items: INodeExecuti
 
     for (let i = 0; i < items.length; i++) {
         const phoneNumber = this.getNodeParameter('phoneNumber', i, '') as string;
-        const credentials = await this.getCredentials('GreenApiAuth') as {
+        const credentials = await this.getCredentials('GreenApiAuthApi') as {
             idInstance: string;
             apiTokenKey: string;
         };

@@ -33,11 +33,11 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/credentials/GreenApiAuth.credentials.js"
+      "dist/credentials/GreenApiAuthApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/GREENAPI/GREENAPI.node.js",
-      "dist/nodes/GREENAPI/GREENAPITrigger.node.js"
+      "dist/nodes/Greenapi/Greenapi.node.js",
+      "dist/nodes/Greenapi/GreenapiTrigger.node.js"
     ]
   },
   "devDependencies": {

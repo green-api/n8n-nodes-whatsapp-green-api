@@ -4,7 +4,7 @@ export async function getContacts(this: IExecuteFunctions, items: INodeExecution
     const returnData: INodeExecutionData[] = [];
 
     for (let i = 0; i < items.length; i++) {
-        const credentials = await this.getCredentials('GreenApiAuth') as {
+        const credentials = await this.getCredentials('GreenApiAuthApi') as {
             idInstance: string;
             apiTokenKey: string;
         };

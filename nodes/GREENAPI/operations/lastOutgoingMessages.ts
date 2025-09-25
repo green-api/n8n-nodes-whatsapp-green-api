@@ -5,7 +5,7 @@ export async function lastOutgoingMessages(this: IExecuteFunctions, items: INode
 
     for (let i = 0; i < items.length; i++) {
         const minutes = this.getNodeParameter('minutes', i, '') as string;
-        const credentials = await this.getCredentials('GreenApiAuth') as {
+        const credentials = await this.getCredentials('GreenApiAuthApi') as {
             idInstance: string;
             apiTokenKey: string;
         };
