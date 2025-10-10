@@ -8,9 +8,9 @@ import type {
 import { NodeConnectionType } from 'n8n-workflow';
 declare const console: any;
 
-export class GREENAPITrigger implements INodeType {
+export class GreenapiTrigger implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'GREENAPI Trigger',
+		displayName: 'GREEN-API Trigger',
 		name: 'greenapiTrigger',
 		icon: 'file:greenapi.svg',
 		group: ['trigger'],
