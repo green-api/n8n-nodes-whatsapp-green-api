@@ -16,7 +16,8 @@ export async function lastOutgoingMessages(this: IExecuteFunctions, items: INode
         const response = await this.helpers.request({
             method: 'GET',
             url:  url,
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json' },
+            json: true,
         });
 
         returnData.push(response);
