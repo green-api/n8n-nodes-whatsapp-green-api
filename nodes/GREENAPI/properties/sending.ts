@@ -12,14 +12,14 @@ export const sendingOperations: INodeProperties[] = [
 			},
 		},
 		options: [
-			{ name: 'sendMessage', value: 'sendMessage', action: 'Send message' },
+			{ name: 'forwardMessages', value: 'forwardMessages', action: 'Forward messages'},
+			{ name: 'sendContact', value: 'sendContact', action: 'Send a contact' },
 			{ name: 'sendFileByUrl', value: 'sendFileByUrl', action: 'Send file by url' },
 			{ name: 'sendInteractiveButtons', value: 'sendInteractiveButtons', action: 'Send interactive buttons' },
 			{ name: 'sendInteractiveButtonsReply', value: 'sendInteractiveButtonsReply', action: 'Send interactive buttons reply' },
+			{ name: 'sendLocation', value: 'sendLocation', action: 'Send a location' },
+			{ name: 'sendMessage', value: 'sendMessage', action: 'Send message' },
 			{ name: 'sendPoll', value: 'sendPoll', action: 'Send poll' },
-            { name: 'sendContact', value: 'sendContact', action: 'Send a contact' },
-            { name: 'sendLocation', value: 'sendLocation', action: 'Send a location' },
-			{ name: 'forwardMessages', value: 'forwardMessages', action: 'Forward messages'},
 		],
 		default: 'sendMessage',
 	},
@@ -105,7 +105,7 @@ export const sendingOperations: INodeProperties[] = [
 		},
 	},
     {
-		displayName: 'Phone number',
+		displayName: 'Phone Number',
 		name: 'phoneContact',
 		type: 'number',
 		default: '',
@@ -118,12 +118,12 @@ export const sendingOperations: INodeProperties[] = [
 		},
 	},
     {
-		displayName: 'First name',
+		displayName: 'First Name',
 		name: 'firstName',
 		type: 'string',
 		default: '',
 		placeholder: 'First name',
-		required: false,
+
 		displayOptions: {
 			show: {
 				operation: ['sendContact'],
@@ -131,12 +131,12 @@ export const sendingOperations: INodeProperties[] = [
 		},
 	},
     {
-		displayName: 'Middle name',
+		displayName: 'Middle Name',
 		name: 'middleName',
 		type: 'string',
 		default: '',
 		placeholder: 'Middle name',
-		required: false,
+
 		displayOptions: {
 			show: {
 				operation: ['sendContact'],
@@ -144,12 +144,12 @@ export const sendingOperations: INodeProperties[] = [
 		},
 	},
     {
-		displayName: 'Last name',
+		displayName: 'Last Name',
 		name: 'lastName',
 		type: 'string',
 		default: '',
 		placeholder: 'Last name',
-		required: false,
+
 		displayOptions: {
 			show: {
 				operation: ['sendContact'],
@@ -161,7 +161,7 @@ export const sendingOperations: INodeProperties[] = [
 		name: 'company',
 		type: 'string',
 		default: '',
-		required: false,
+
 		placeholder: 'Company name',
 		displayOptions: {
 			show: {
@@ -171,12 +171,12 @@ export const sendingOperations: INodeProperties[] = [
 	},
 
     {
-		displayName: 'Location name',
+		displayName: 'Location Name',
 		name: 'nameLocation',
 		type: 'string',
 		default: '',
 		placeholder: 'Office',
-		required: false,
+
 		displayOptions: {
 			show: {
 				operation: ['sendLocation'],
@@ -184,12 +184,12 @@ export const sendingOperations: INodeProperties[] = [
 		},
 	},
     {
-		displayName: 'Location address',
+		displayName: 'Location Address',
 		name: 'address',
 		type: 'string',
 		default: '',
 		placeholder: '123456, Astana',
-		required: false,
+
 		displayOptions: {
 			show: {
 				operation: ['sendLocation'],
@@ -197,7 +197,7 @@ export const sendingOperations: INodeProperties[] = [
 		},
 	},
     {
-		displayName: 'Location latitude',
+		displayName: 'Location Latitude',
 		name: 'latitude',
 		type: 'number',
 		default: '',
@@ -210,7 +210,7 @@ export const sendingOperations: INodeProperties[] = [
 		},
 	},
     {
-		displayName: 'Location longitude',
+		displayName: 'Location Longitude',
 		name: 'longitude',
 		type: 'number',
 		default: '',
@@ -236,7 +236,7 @@ export const sendingOperations: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'messages',
+		displayName: 'Messages',
 		name: 'messages',
 		type: 'fixedCollection',
 		placeholder: 'add a message',

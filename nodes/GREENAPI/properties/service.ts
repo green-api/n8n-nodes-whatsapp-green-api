@@ -12,20 +12,18 @@ export const serviceOperations: INodeProperties[] = [
             },
         },
         options: [
-            { name: 'checkWhatsapp', value: 'checkWhatsapp', action: 'Check WhatsApp account availability' },
-            { name: 'getContacts', value: 'getContacts', action: 'Get contacts' },
-            { name: 'getContactInfo', value: 'getContactInfo', action: 'Get contact info' },
-            { name: 'getAvatar', value: 'getAvatar', action: 'Get avatar' },
-            { name: 'setDisappearingChat', value: 'setDisappearingChat', action: 'Change the settings of disappearing chat messages' },
-            { name: 'editMessage', value: 'editMessage', action: 'Edit the text message' },
-            { name: 'deleteMessage', value: 'deleteMessage', action: 'Delete a message' },
             { name: 'archiveChat', value: 'archiveChat', action: 'Archive a chat' },
-            { name: 'unarchiveChat', value: 'unarchiveChat', action: 'Unarchive a chat' },
+            { name: 'checkWhatsapp', value: 'checkWhatsapp', action: 'Check whats app account availability' },
+            { name: 'deleteMessage', value: 'deleteMessage', action: 'Delete a message' },
+            { name: 'editMessage', value: 'editMessage', action: 'Edit the text message' },
+            { name: 'getAvatar', value: 'getAvatar', action: 'Get avatar' },
+            { name: 'getContactInfo', value: 'getContactInfo', action: 'Get contact info' },
+            { name: 'getContacts', value: 'getContacts', action: 'Get contacts' },
             { name: 'readChat', value: 'readChat', action: 'Mark chat as read' },
+            { name: 'setDisappearingChat', value: 'setDisappearingChat', action: 'Change the settings of disappearing chat messages' },
+            { name: 'unarchiveChat', value: 'unarchiveChat', action: 'Unarchive a chat' },
         ],
         default: 'getContacts',
-
-        
     },
     {
         displayName: 'chatId',
@@ -53,7 +51,7 @@ export const serviceOperations: INodeProperties[] = [
                 operation:['readChat',],
             },
         },
-        required: false,
+
     },
     {
         displayName: 'idMessage',
@@ -88,22 +86,22 @@ export const serviceOperations: INodeProperties[] = [
         name: 'ephemeralExpiration',
         placeholder: '0',
         type: 'options',
-        default: '',
+        default: 0,
 		options: [
 		{
-			name: 'Off (0 seconds)',
+			name: 'Off (0 Seconds)',
 			value: 0,
 		},
 		{
-			name: '24 hours',
+			name: '24 Hours',
 			value: 86400,
 		},
 		{
-			name: '7 days',
+			name: '7 Days',
 			value: 604800,
 		},
 		{
-			name: '90 days',
+			name: '90 Days',
 			value: 7776000,
 		},
 	],
@@ -116,7 +114,7 @@ export const serviceOperations: INodeProperties[] = [
         required: true,
     },
     {
-        displayName: 'message',
+        displayName: 'Message',
         name: 'message',
         placeholder: '',
         type: 'string',

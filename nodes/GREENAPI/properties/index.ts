@@ -13,11 +13,12 @@ export const baseProperties: INodeProperties[] = [
 		type: 'options',
 		options: [
 			{ name: 'Account', value: 'account' },
-			{ name: 'Sending', value: 'sending' },
-			{ name: 'Queue', value: 'queue' },
-			{ name: 'Journal', value: 'journal' },
-			{ name: 'Service', value: 'service' },
 			{ name: 'Group', value: 'group' },
+			{ name: 'Journal', value: 'journal' },
+			{ name: 'Queue', value: 'queue' },
+			{ name: 'Sending', value: 'sending' },
+			{ name: 'Service', value: 'service' },
+			
 		],
 		noDataExpression: true,
 		required: true,

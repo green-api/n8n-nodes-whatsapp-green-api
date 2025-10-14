@@ -15,10 +15,10 @@ export const accountOperations: INodeProperties[] = [
 			{ name: 'getSettings', value: 'getSettings', action: 'Get settings' },
 			//{ name: 'setSettings', value: 'setSettings', action: 'Set settings' },
 			{ name: 'getStateInstance', value: 'getStateInstance', action: 'Get state instance' },
-			{ name: 'reboot', value: 'reboot', action: 'Reboot instance' },
-			{ name: 'logout', value: 'logout', action: 'Logout instance' },
-			//{ name: 'setProfilePicture', value: 'setProfilePicture', action: 'Set profile picture' },
 			{ name: 'getWaSettings', value: 'getWaSettings', action: 'Get information about the account' },
+			{ name: 'Logout', value: 'logout', action: 'Logout instance' },
+			{ name: 'Reboot', value: 'reboot', action: 'Reboot instance' },
+			//{ name: 'setProfilePicture', value: 'setProfilePicture', action: 'Set profile picture' },
 		],
 		default: 'getWaSettings',
 	},
@@ -27,7 +27,7 @@ export const accountOperations: INodeProperties[] = [
 		name: 'webhookUrl',
 		type: 'string',
 		default: '',
-		required: false,
+
 		displayOptions: {
 			show: {
 				operation: ['setSettings'],
@@ -38,8 +38,9 @@ export const accountOperations: INodeProperties[] = [
 		displayName: 'webhookUrlToken',
 		name: 'webhookUrlToken',
 		type: 'string',
+		typeOptions: { password: true },
 		default: '',
-		required: false,
+
 		displayOptions: {
 			show: {
 				operation: ['setSettings'],
@@ -51,7 +52,7 @@ export const accountOperations: INodeProperties[] = [
 		name: 'delaySendMessagesMilliseconds',
 		type: 'number',
 		default: '',
-		required: false,
+
 		displayOptions: {
 			show: {
 				operation: ['setSettings'],
@@ -62,8 +63,8 @@ export const accountOperations: INodeProperties[] = [
 		displayName: 'markIncomingMessagesReaded',
 		name: 'markIncomingMessagesReaded',
 		type: 'boolean',
-		default: '',
-		required: false,
+		default: false,
+
 		displayOptions: {
 			show: {
 				operation: ['setSettings'],
@@ -74,8 +75,8 @@ export const accountOperations: INodeProperties[] = [
 		displayName: 'outgoingWebhook',
 		name: 'outgoingWebhook',
 		type: 'boolean',
-		default: '',
-		required: false,
+		default: false,
+
 		displayOptions: {
 			show: {
 				operation: ['setSettings'],
@@ -86,8 +87,8 @@ export const accountOperations: INodeProperties[] = [
 		displayName: 'outgoingMessageWebhook',
 		name: 'outgoingMessageWebhook',
 		type: 'boolean',
-		default: '',
-		required: false,
+		default: false,
+
 		displayOptions: {
 			show: {
 				operation: ['setSettings'],
@@ -98,8 +99,8 @@ export const accountOperations: INodeProperties[] = [
 		displayName: 'outgoingAPIMessageWebhook',
 		name: 'outgoingAPIMessageWebhook',
 		type: 'boolean',
-		default: '',
-		required: false,
+		default: false,
+
 		displayOptions: {
 			show: {
 				operation: ['setSettings'],
@@ -110,8 +111,8 @@ export const accountOperations: INodeProperties[] = [
 		displayName: 'stateWebhook',
 		name: 'stateWebhook',
 		type: 'boolean',
-		default: '',
-		required: false,
+		default: false,
+
 		displayOptions: {
 			show: {
 				operation: ['setSettings'],
@@ -122,8 +123,8 @@ export const accountOperations: INodeProperties[] = [
 		displayName: 'incomingWebhook',
 		name: 'incomingWebhook',
 		type: 'boolean',
-		default: '',
-		required: false,
+		default: false,
+
 		displayOptions: {
 			show: {
 				operation: ['setSettings'],
@@ -134,8 +135,8 @@ export const accountOperations: INodeProperties[] = [
 		displayName: 'keepOnlineStatus',
 		name: 'keepOnlineStatus',
 		type: 'boolean',
-		default: '',
-		required: false,
+		default: false,
+
 		displayOptions: {
 			show: {
 				operation: ['setSettings'],
@@ -146,8 +147,8 @@ export const accountOperations: INodeProperties[] = [
 		displayName: 'pollMessageWebhook',
 		name: 'pollMessageWebhook',
 		type: 'boolean',
-		default: '',
-		required: false,
+		default: false,
+
 		displayOptions: {
 			show: {
 				operation: ['setSettings'],
@@ -158,8 +159,8 @@ export const accountOperations: INodeProperties[] = [
 		displayName: 'incomingCallWebhook',
 		name: 'incomingCallWebhook',
 		type: 'boolean',
-		default: '',
-		required: false,
+		default: false,
+
 		displayOptions: {
 			show: {
 				operation: ['setSettings'],
@@ -170,8 +171,8 @@ export const accountOperations: INodeProperties[] = [
 		displayName: 'editedMessageWebhook',
 		name: 'editedMessageWebhook',
 		type: 'boolean',
-		default: '',
-		required: false,
+		default: false,
+
 		displayOptions: {
 			show: {
 				operation: ['setSettings'],
@@ -182,8 +183,8 @@ export const accountOperations: INodeProperties[] = [
 		displayName: 'deletedMessageWebhook',
 		name: 'deletedMessageWebhook',
 		type: 'boolean',
-		default: '',
-		required: false,
+		default: false,
+
 		displayOptions: {
 			show: {
 				operation: ['setSettings'],
