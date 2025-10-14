@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-greenapi",
-  "version": "0.1.2rc1",
+  "version": "0.1.3",
   "description": "n8n node for Green-API for WhatsApp",
   "keywords": [
     "n8n-community-node-package",
@@ -33,11 +33,13 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/credentials/GreenApiAuthApi.credentials.js"
+      "dist/credentials/GreenApiAuthApi.credentials.js",
+      "dist/credentials/GreenApiPartnerAuthApi.credentials.js"
     ],
     "nodes": [
       "dist/nodes/Greenapi/Greenapi.node.js",
-      "dist/nodes/Greenapi/GreenapiTrigger.node.js"
+      "dist/nodes/Greenapi/GreenapiTrigger.node.js",
+      "dist/nodes/Greenapi/GreenapiPartner.node.js"
     ]
   },
   "devDependencies": {

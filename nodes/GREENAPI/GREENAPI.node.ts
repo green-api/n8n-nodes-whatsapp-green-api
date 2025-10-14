@@ -64,8 +64,6 @@ import { leaveGroup } from './operations/leaveGroup';
 
 
 
-
-
 export class Greenapi implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'GREEN-API for WhatsApp',
@@ -276,12 +274,6 @@ export class Greenapi implements INodeType {
 				responseData = await leaveGroup.call(this, items);
 				returnData.push(...responseData);
 				break;
-
-
-
-
-
-
 
 			case 'forwardMessages':
 				responseData = await forwardMessages.call(this, items);

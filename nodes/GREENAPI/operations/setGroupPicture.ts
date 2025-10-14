@@ -1,4 +1,5 @@
-/*import { IExecuteFunctions, INodeExecutionData, IDataObject, NodeOperationError, JsonObject } from 'n8n-workflow';
+/*
+import { IExecuteFunctions, INodeExecutionData, IDataObject, NodeOperationError, JsonObject } from 'n8n-workflow';
 declare const Buffer: any;
 declare const require: any;
 
@@ -59,5 +60,5 @@ export async function setGroupPicture(
 		};
 
 		return await this.helpers.request(options as JsonObject);
-	}
+}
 */
