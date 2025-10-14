@@ -21,7 +21,6 @@ export const groupOperations: INodeProperties[] = [
             { name: 'removeAdmin', value: 'removeAdmin', action: 'Remove group admin' },
             { name: 'setGroupPicture', value: 'setGroupPicture', action: 'Set group picture' },
             { name: 'leaveGroup', value: 'leaveGroup', action: 'Leave group' },
-            { name: 'setGroupPicture', value: 'setGroupPicture', action: 'Set group picture' },
         ],
         default: 'getGroupData',
     },

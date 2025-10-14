@@ -12,18 +12,18 @@ export const serviceOperations: INodeProperties[] = [
             },
         },
         options: [
-            { name: 'readChat', value: 'readChat', action: 'Show messages queue' },
-            { name: 'checkWhatsapp', value: 'checkWhatsapp', action: 'Clear messages queue' },
-            { name: 'getAvatar', value: 'getAvatar', action: 'Show messages queue' },
-            { name: 'getContacts', value: 'getContacts', action: 'Clear messages queue' },
-            { name: 'getContactInfo', value: 'getContactInfo', action: 'Show messages queue' },
-            { name: 'deleteMessage', value: 'deleteMessage', action: 'Clear messages queue' },
-            { name: 'archiveChat', value: 'archiveChat', action: 'Show messages queue' },
-            { name: 'unarchiveChat', value: 'unarchiveChat', action: 'Clear messages queue' },
-            { name: 'setDisappearingChat', value: 'setDisappearingChat', action: 'Show messages queue' },
-            { name: 'editMessage', value: 'editMessage', action: 'Clear messages queue' },
+            { name: 'checkWhatsapp', value: 'checkWhatsapp', action: 'Check WhatsApp account availability' },
+            { name: 'getContacts', value: 'getContacts', action: 'Get contacts' },
+            { name: 'getContactInfo', value: 'getContactInfo', action: 'Get contact info' },
+            { name: 'getAvatar', value: 'getAvatar', action: 'Get avatar' },
+            { name: 'setDisappearingChat', value: 'setDisappearingChat', action: 'Change the settings of disappearing chat messages' },
+            { name: 'editMessage', value: 'editMessage', action: 'Edit the text message' },
+            { name: 'deleteMessage', value: 'deleteMessage', action: 'Delete a message' },
+            { name: 'archiveChat', value: 'archiveChat', action: 'Archive a chat' },
+            { name: 'unarchiveChat', value: 'unarchiveChat', action: 'Unarchive a chat' },
+            { name: 'readChat', value: 'readChat', action: 'Mark chat as read' },
         ],
-        default: 'getWaSettings',
+        default: 'getContacts',
 
         
     },
@@ -36,7 +36,7 @@ export const serviceOperations: INodeProperties[] = [
         displayOptions: {
             show: {
                 resource: ['service',],
-                operation:['readChat','getMessage', 'deleteMessage'],
+                operation:['readChat','getMessage', 'editMessage', 'deleteMessage', 'getAvatar', 'getContactInfo', 'archiveChat', 'unarchiveChat', 'setDisappearingChat',],
             },
         },
         required: true,
@@ -44,7 +44,7 @@ export const serviceOperations: INodeProperties[] = [
     {
         displayName: 'idMessage',
         name: 'idMessage',
-        placeholder: '79000000000@c.us',
+        placeholder: '',
         type: 'string',
         default: '',
         displayOptions: {
@@ -58,13 +58,13 @@ export const serviceOperations: INodeProperties[] = [
     {
         displayName: 'idMessage',
         name: 'idMessage',
-        placeholder: '79000000000@c.us',
+        placeholder: '',
         type: 'string',
         default: '',
         displayOptions: {
             show: {
                 resource: ['service',],
-                operation:['getAvatar', 'GetContactInfo', 'editMessage', 'deleteMessage', 'archiveChat', 'unarchiveChat', 'SetDisappearingChat'],
+                operation:['GetContactInfo', 'editMessage', 'deleteMessage', 'SetDisappearingChat'],
             },
         },
         required: true,
@@ -87,12 +87,44 @@ export const serviceOperations: INodeProperties[] = [
         displayName: 'ephemeralExpiration', //тут выбор из 4 вариантов
         name: 'ephemeralExpiration',
         placeholder: '0',
-        type: 'number',
+        type: 'options',
         default: '',
+		options: [
+		{
+			name: 'Off (0 seconds)',
+			value: 0,
+		},
+		{
+			name: '24 hours',
+			value: 86400,
+		},
+		{
+			name: '7 days',
+			value: 604800,
+		},
+		{
+			name: '90 days',
+			value: 7776000,
+		},
+	],
         displayOptions: {
             show: {
                 resource: ['service',],
                 operation:['setDisappearingChat',],
+            },
+        },
+        required: true,
+    },
+    {
+        displayName: 'message',
+        name: 'message',
+        placeholder: '',
+        type: 'string',
+        default: '',
+        displayOptions: {
+            show: {
+                resource: ['service',],
+                operation:['editMessage',],
             },
         },
         required: true,

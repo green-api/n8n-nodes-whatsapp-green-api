@@ -1,5 +1,7 @@
 import { IExecuteFunctions, INodeExecutionData } from 'n8n-workflow';
 
+declare const console: any;
+
 export async function readChat(this: IExecuteFunctions, items: INodeExecutionData[]) {
     const returnData: INodeExecutionData[] = [];
 
@@ -10,20 +12,30 @@ export async function readChat(this: IExecuteFunctions, items: INodeExecutionDat
             idInstance: string;
             apiTokenKey: string;
         };
-
-        const response = await this.helpers.request({
+        console.log(idMessage)
+        let response: any;
+        if(idMessage) {
+            response = await this.helpers.request({
             method: 'POST',
             url: `https://api.green-api.com/waInstance${credentials.idInstance}/readChat/${credentials.apiTokenKey}`,
             headers: { 'Content-Type': 'application/json' },
             body: {
                     'chatId': chatId,
-                    'idMessage': idMessage
+                    'idMessage': idMessage,
                 },
             json: true,
-        });
-
-        returnData.push(response);
+        });}
+        else{
+            response = await this.helpers.request({
+            method: 'POST',
+            url: `https://api.green-api.com/waInstance${credentials.idInstance}/readChat/${credentials.apiTokenKey}`,
+            headers: { 'Content-Type': 'application/json' },
+            body: {
+                    'chatId': chatId,
+                },
+            json: true,
+        });}
+        returnData.push(response);        
     }
-
     return returnData;
 }

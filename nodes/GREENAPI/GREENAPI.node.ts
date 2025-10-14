@@ -6,21 +6,31 @@ import type {
 } from 'n8n-workflow';
 import { NodeConnectionType } from 'n8n-workflow';
 import properties from './properties';
+
+
+
+//sending
 import { sendMessage } from './operations/sendMessage';
 import { sendFileByUrl } from './operations/sendFileByUrl';
 import { sendPoll } from './operations/sendPoll';
+import { sendInteractiveButtons } from './operations/sendInteractiveButtons';
+import { sendInteractiveButtonsReply } from './operations/sendInteractiveButtonsReply';
+import { forwardMessages } from './operations/forwardMessages';
+import { sendContact } from './operations/sendContact';
+import { sendLocation } from './operations/sendLocation';
+
 import { getChatHistory } from './operations/getChatHistory';
 import { getContacts } from './operations/getContacts';
 import { checkWhatsapp } from './operations/checkWhatsapp';
 import { getAvatar } from './operations/getAvatar';
 import { lastOutgoingMessages } from './operations/lastOutgoingMessages';
 import { lastIncomingMessages } from './operations/lastIncomingMessages';
-import { sendInteractiveButtons } from './operations/sendInteractiveButtons';
-import { sendInteractiveButtonsReply } from './operations/sendInteractiveButtonsReply';
 
-import { sendContact } from './operations/sendContact';
+
+
 
 import { getSettings } from './operations/getSettings';
+import { setSettings } from './operations/setSettings';
 import { getStateInstance } from './operations/getStateInstance';
 import { getWaSettings } from './operations/getWaSettings';
 import { reboot } from './operations/reboot';
@@ -29,7 +39,7 @@ import { logout } from './operations/logout';
 import { showMessagesQueue } from './operations/showMessagesQueue';
 import { clearMessagesQueue } from './operations/clearMessagesQueue';
 
-import { sendLocation } from './operations/sendLocation';
+
 
 import { getMessage } from './operations/getMessage';
 
@@ -41,6 +51,7 @@ import { setDisappearingChat } from './operations/setDisappearingChat';
 import { editMessage } from './operations/editMessage';
 import { readChat } from './operations/readChat';
 
+//groups
 import { createGroup } from './operations/createGroup';
 import { updateGroupName } from './operations/updateGroupName';
 import { getGroupData } from './operations/getGroupData';
@@ -48,8 +59,11 @@ import { addGroupParticipant } from './operations/addGroupParticipant';
 import { removeGroupParticipant } from './operations/removeGroupParticipant';
 import { setGroupAdmin } from './operations/setGroupAdmin';
 import { removeAdmin } from './operations/removeAdmin';
-import { setGroupPicture } from './operations/setGroupPicture';
+//import { setGroupPicture } from './operations/setGroupPicture';
 import { leaveGroup } from './operations/leaveGroup';
+
+
+
 
 
 export class Greenapi implements INodeType {
@@ -135,6 +149,10 @@ export class Greenapi implements INodeType {
 			
 			case 'getSettings':
 				responseData = await getSettings.call(this, items);
+				returnData.push(...responseData);
+				break;		
+			case 'setSettings':
+				responseData = await setSettings.call(this, items);
 				returnData.push(...responseData);
 				break;			
 			case 'getStateInstance':
@@ -250,14 +268,25 @@ export class Greenapi implements INodeType {
 				responseData = await removeAdmin.call(this, items);
 				returnData.push(...responseData);
 				break;
-			case 'setGroupPicture':
+			/*case 'setGroupPicture':
 				responseData = await setGroupPicture.call(this, items);
 				returnData.push(...responseData);
-				break;
+				break;*/
 			case 'leaveGroup':
 				responseData = await leaveGroup.call(this, items);
 				returnData.push(...responseData);
 				break;
+
+
+
+
+
+
+
+			case 'forwardMessages':
+				responseData = await forwardMessages.call(this, items);
+				returnData.push(...responseData);
+				break;	
 		}
 		return [this.helpers.returnJsonArray(returnData)];	
 	}

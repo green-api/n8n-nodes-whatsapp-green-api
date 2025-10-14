@@ -12,7 +12,8 @@ export async function getContacts(this: IExecuteFunctions, items: INodeExecution
         const response = await this.helpers.request({
             method: 'GET',
             url: `https://api.green-api.com/waInstance${credentials.idInstance}/getContacts/${credentials.apiTokenKey}`,
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json' },
+            json: true,
         });
 
         returnData.push(response);

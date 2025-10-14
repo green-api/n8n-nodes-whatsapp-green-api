@@ -15,6 +15,6 @@ export const queueOperations: INodeProperties[] = [
             { name: 'showMessagesQueue', value: 'showMessagesQueue', action: 'Show messages queue' },
             { name: 'clearMessagesQueue', value: 'clearMessagesQueue', action: 'Clear messages queue' },
         ],
-        default: 'getWaSettings',
+        default: 'showMessagesQueue',
     },
 ];
