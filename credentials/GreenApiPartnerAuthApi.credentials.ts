@@ -18,6 +18,7 @@ export class GreenApiPartnerAuthApi implements ICredentialType {
             displayName: 'partnerToken',
             name: 'partnerToken',
             type: 'string',
+												typeOptions: { password: true },
             required: true,
             default: '',
         }

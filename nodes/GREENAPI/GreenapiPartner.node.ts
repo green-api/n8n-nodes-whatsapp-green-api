@@ -62,17 +62,17 @@ export class GreenapiPartner implements INodeType {
 					{
 						name: 'createInstance',
 						value: 'createInstance',
-						action: 'createInstance'
+						action: 'Create instance'
 					},
 					{
 						name: 'getInstances',
 						value: 'getInstances',
-						action: 'getInstances'
+						action: 'Get instances'
 					},
 					{
 						name: 'deleteInstanceAccount',
 						value: 'deleteInstanceAccount',
-						action: 'deleteInstanceAccount'
+						action: 'Delete instance account'
 					},
 				],
 				default: 'getInstances',
@@ -81,7 +81,7 @@ export class GreenapiPartner implements INodeType {
 				displayName: 'idInstance',
 				name: 'idInstance',
 				type: 'number',
-				default: '77000000000',
+				default: 0,
 				displayOptions: {
 					show: {
 						operation: ['deleteInstanceAccount'],

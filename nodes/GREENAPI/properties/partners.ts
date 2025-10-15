@@ -12,9 +12,9 @@ export const partnersOperations: INodeProperties[] = [
             },
         },
         options: [
-            { name: 'getInstances', value: 'getInstances', action: 'getInstances' },
-            { name: 'createInstance', value: 'createInstance', action: 'createInstance' },
-			{ name: 'deleteInstanceAccount', value: 'deleteInstanceAccount', action: 'deleteInstanceAccount' },
+            { name: 'getInstances', value: 'getInstances', action: 'Get instances' },
+            { name: 'createInstance', value: 'createInstance', action: 'Create instance' },
+			{ name: 'deleteInstanceAccount', value: 'deleteInstanceAccount', action: 'Delete instance account' },
         ],
         default: 'getInstances',
     },
