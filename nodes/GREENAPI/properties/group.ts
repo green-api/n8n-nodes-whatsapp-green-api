@@ -70,7 +70,6 @@ export const groupOperations: INodeProperties[] = [
         },
         required: true,
     },
-
     {
         displayName: 'chatIds',
         name: 'chatIds',

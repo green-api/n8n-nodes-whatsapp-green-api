@@ -62,7 +62,19 @@ import { removeAdmin } from './operations/removeAdmin';
 //import { setGroupPicture } from './operations/setGroupPicture';
 import { leaveGroup } from './operations/leaveGroup';
 
+import { test } from './operations/test';
 
+import { sendTextStatus } from './operations/statusMethods';
+import { sendVoiceStatus } from './operations/statusMethods';
+import { sendMediaStatus } from './operations/statusMethods';
+import { deleteStatus } from './operations/statusMethods';
+import { getOutgoingStatuses } from './operations/statusMethods';
+import { getIncomingStatuses } from './operations/statusMethods';
+import { getStatusStatistic } from './operations/statusMethods';
+
+import { downloadFile } from './operations/downloadFile';
+import { receiveNotification } from './operations/receiveDeleteNotification';
+import { deleteNotification } from './operations/receiveDeleteNotification';
 
 export class Greenapi implements INodeType {
 	description: INodeTypeDescription = {
@@ -277,6 +289,57 @@ export class Greenapi implements INodeType {
 
 			case 'forwardMessages':
 				responseData = await forwardMessages.call(this, items);
+				returnData.push(...responseData);
+				break;	
+
+
+
+			case 'sendTextStatus':
+				responseData = await sendTextStatus.call(this, items);
+				returnData.push(...responseData);
+				break;
+			case 'sendMediaStatus':
+				responseData = await sendMediaStatus.call(this, items);
+				returnData.push(...responseData);
+				break;
+			case 'sendVoiceStatus':
+				responseData = await sendVoiceStatus.call(this, items);
+				returnData.push(...responseData);
+				break;
+			case 'deleteStatus':
+				responseData = await deleteStatus.call(this, items);
+				returnData.push(...responseData);
+				break;
+			case 'getStatusStatistic':
+				responseData = await getStatusStatistic.call(this, items);
+				returnData.push(...responseData);
+				break;
+			case 'getIncomingStatuses':
+				responseData = await getIncomingStatuses.call(this, items);
+				returnData.push(...responseData);
+				break;
+			case 'getOutgoingStatuses':
+				responseData = await getOutgoingStatuses.call(this, items);
+				returnData.push(...responseData);
+				break;
+
+
+			case 'downloadFile':
+				responseData = await downloadFile.call(this, items);
+				returnData.push(...responseData);
+				break;
+			case 'receiveNotification':
+				responseData = await receiveNotification.call(this, items);
+				returnData.push(...responseData);
+				break;
+			case 'deleteNotification':
+				responseData = await deleteNotification.call(this, items);
+				returnData.push(...responseData);
+				break;
+			
+
+			case 'test':
+				responseData = await test.call(this, items);
 				returnData.push(...responseData);
 				break;	
 		}

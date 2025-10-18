@@ -1,6 +1,6 @@
 import { IExecuteFunctions, INodeExecutionData } from 'n8n-workflow';
 
-export async function readChat(this: IExecuteFunctions, items: INodeExecutionData[]) {
+export async function downloadFile(this: IExecuteFunctions, items: INodeExecutionData[]) {
     const returnData: INodeExecutionData[] = [];
 
     for (let i = 0; i < items.length; i++) {
@@ -11,20 +11,19 @@ export async function readChat(this: IExecuteFunctions, items: INodeExecutionDat
             apiTokenKey: string;
         };
 
-        let body: any;
-        body = {'chatId': chatId};
-        if (idMessage){
-            body['idMessage']=idMessage;
-        }
-
         const response = await this.helpers.request({
             method: 'POST',
-            url: `https://api.green-api.com/waInstance${credentials.idInstance}/readChat/${credentials.apiTokenKey}`,
+            url: `https://api.green-api.com/waInstance${credentials.idInstance}/downloadFile/${credentials.apiTokenKey}`,
             headers: { 'Content-Type': 'application/json' },
-            body,
+            body: {
+                    'chatId': chatId,
+                    'idMessage': idMessage,
+                },
             json: true,
         });
-        returnData.push(response);        
+
+        returnData.push(response);
     }
+
     return returnData;
 }

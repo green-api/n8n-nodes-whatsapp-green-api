@@ -43,6 +43,8 @@
     ]
   },
   "devDependencies": {
+    "@types/mime-types": "^3.0.1",
+    "@types/node": "^24.8.1",
     "@typescript-eslint/parser": "~5.45",
     "eslint-plugin-n8n-nodes-base": "^1.11.0",
     "gulp": "^4.0.2",
@@ -52,5 +54,8 @@
   },
   "peerDependencies": {
     "n8n-workflow": "*"
+  },
+  "dependencies": {
+    "mime-types": "^3.0.1"
   }
 }
