@@ -15,11 +15,13 @@ export const sendingOperations: INodeProperties[] = [
 			{ name: 'forwardMessages', value: 'forwardMessages', action: 'Forward messages'},
 			{ name: 'sendContact', value: 'sendContact', action: 'Send a contact' },
 			{ name: 'sendFileByUrl', value: 'sendFileByUrl', action: 'Send file by url' },
+			{ name: 'sendFileByUpload', value: 'sendFileByUpload', action: 'Send file by upload' },
 			{ name: 'sendInteractiveButtons', value: 'sendInteractiveButtons', action: 'Send interactive buttons' },
 			{ name: 'sendInteractiveButtonsReply', value: 'sendInteractiveButtonsReply', action: 'Send interactive buttons reply' },
 			{ name: 'sendLocation', value: 'sendLocation', action: 'Send a location' },
 			{ name: 'sendMessage', value: 'sendMessage', action: 'Send message' },
 			{ name: 'sendPoll', value: 'sendPoll', action: 'Send poll' },
+			{ name: 'uploadFile', value: 'uploadFile', action: 'Upload File' },
 		],
 		default: 'sendMessage',
 	},
@@ -35,6 +37,9 @@ export const sendingOperations: INodeProperties[] = [
 			show: {
 				resource: ['sending'],
 			},
+			hide: {
+				operation: ['uploadFile'],
+			},
 		},
 		required: true,
 	},
@@ -48,7 +53,7 @@ export const sendingOperations: INodeProperties[] = [
 		placeholder: '(optional)',
 		displayOptions: {
 			show: {
-				operation: ['sendMessage', 'sendFileByUrl','sendPoll', 'sendInteractiveButtons', 'sendInteractiveButtonsReply', 'sendContact', 'sendLocation'],
+				operation: ['sendMessage', 'sendFileByUrl', 'sendFileByUpload','sendPoll', 'sendInteractiveButtons', 'sendInteractiveButtonsReply', 'sendContact', 'sendLocation'],
 			},
 		},
 	},
@@ -69,10 +74,10 @@ export const sendingOperations: INodeProperties[] = [
 		name: 'caption',
 		type: 'string',
 		default: '',
-		required: true,
+		required: false,
 		displayOptions: {
 			show: {
-				operation: ['sendFileByUrl',],
+				operation: ['sendFileByUrl', 'sendFileByUpload'],
 			},
 		},
 	},
@@ -452,11 +457,38 @@ export const sendingOperations: INodeProperties[] = [
 		type: 'boolean',
 		default: false,
 		required: true,
-
 		displayOptions: {
 			show: {
 				operation: ['sendPoll'],
 			},
 		},
+	},
+	{
+		displayName: 'fileName',
+		name: 'fileName',
+		type: 'string',
+		placeholder: 'image.jpg',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['sending'],
+				operation: ['sendFileByUpload']
+			},
+		},
+		required: true,
+	},
+	{
+		displayName: 'filePath',
+		name: 'filePath',
+		type: 'string',
+		placeholder: 'C:\\Users\\admin\\Images\\image.jpg',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['sending'],
+				operation: ['uploadFile', 'sendFileByUpload']
+			},
+		},
+		required: true,
 	},
 ];

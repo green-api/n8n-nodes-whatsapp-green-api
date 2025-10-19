@@ -12,6 +12,8 @@ import properties from './properties';
 //sending
 import { sendMessage } from './operations/sendMessage';
 import { sendFileByUrl } from './operations/sendFileByUrl';
+import { sendFileByUpload } from './operations/sendFileByUpload';
+import { uploadFile } from './operations/uploadFile';
 import { sendPoll } from './operations/sendPoll';
 import { sendInteractiveButtons } from './operations/sendInteractiveButtons';
 import { sendInteractiveButtonsReply } from './operations/sendInteractiveButtonsReply';
@@ -30,6 +32,7 @@ import { lastIncomingMessages } from './operations/lastIncomingMessages';
 
 
 import { getSettings } from './operations/getSettings';
+import { setProfilePicture } from './operations/setProfilePicture';
 import { setSettings } from './operations/setSettings';
 import { getStateInstance } from './operations/getStateInstance';
 import { getWaSettings } from './operations/getWaSettings';
@@ -59,7 +62,7 @@ import { addGroupParticipant } from './operations/addGroupParticipant';
 import { removeGroupParticipant } from './operations/removeGroupParticipant';
 import { setGroupAdmin } from './operations/setGroupAdmin';
 import { removeAdmin } from './operations/removeAdmin';
-//import { setGroupPicture } from './operations/setGroupPicture';
+import { setGroupPicture } from './operations/setGroupPicture';
 import { leaveGroup } from './operations/leaveGroup';
 
 import { test } from './operations/test';
@@ -114,6 +117,14 @@ export class Greenapi implements INodeType {
 				responseData = await sendFileByUrl.call(this, items);
 				returnData.push(...responseData);
 				break;
+			case 'sendFileByUpload':
+				responseData = await sendFileByUpload.call(this, items);
+				returnData.push(...responseData);
+				break;
+			case 'uploadFile':
+				responseData = await uploadFile.call(this, items);
+				returnData.push(...responseData);
+				break;
 			case 'getChatHistory':
 				responseData = await getChatHistory.call(this, items);
 				returnData.push(...responseData);
@@ -160,7 +171,11 @@ export class Greenapi implements INodeType {
 			case 'getSettings':
 				responseData = await getSettings.call(this, items);
 				returnData.push(...responseData);
-				break;		
+				break;	
+			case 'setProfilePicture':
+				responseData = await setProfilePicture.call(this, items);
+				returnData.push(...responseData);
+				break;	
 			case 'setSettings':
 				responseData = await setSettings.call(this, items);
 				returnData.push(...responseData);
@@ -278,10 +293,10 @@ export class Greenapi implements INodeType {
 				responseData = await removeAdmin.call(this, items);
 				returnData.push(...responseData);
 				break;
-			/*case 'setGroupPicture':
+			case 'setGroupPicture':
 				responseData = await setGroupPicture.call(this, items);
 				returnData.push(...responseData);
-				break;*/
+				break;
 			case 'leaveGroup':
 				responseData = await leaveGroup.call(this, items);
 				returnData.push(...responseData);

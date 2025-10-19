@@ -1,64 +1,41 @@
-/*
-import { IExecuteFunctions, INodeExecutionData, IDataObject, NodeOperationError, JsonObject } from 'n8n-workflow';
-declare const Buffer: any;
-declare const require: any;
+import { IExecuteFunctions, INodeExecutionData } from 'n8n-workflow';
 
-//доделать
+import path from 'path';
 
-export async function setGroupPicture(
-		this: IExecuteFunctions, items: INodeExecutionData[],
-	): Promise<any> {
-		const groupId = this.getNodeParameter('groupId', items) as string;
-		const filePath = this.getNodeParameter('file', items) as string;
+import mime from 'mime-types';
+export async function setGroupPicture(this: IExecuteFunctions, items: INodeExecutionData[]) {
+    const credentials = await this.getCredentials('greenApiAuthApi') as {
+            idInstance: string;
+            apiTokenKey: string;
+        };
+    const returnData: INodeExecutionData[] = [];
+    for (let i = 0; i < items.length; i++) {
+		const groupId = this.getNodeParameter('groupId', i);
+        const filePath = this.getNodeParameter('filePath', i);
+        const stream = await this.helpers.createReadStream(filePath);
+        const filename = path.basename(filePath);
+        const contentType = mime.lookup(filename) || 'application/octet-stream';
 
-		const items = this.getInputData();
-		const formData: IDataObject = {
-			groupId,
-		};
+        const response = await this.helpers.request({
+            method: 'POST',
+            url: `https://api.green-api.com/waInstance${credentials.idInstance}/setGroupPicture/${credentials.apiTokenKey}`,
+            formData: {
+				'groupId': groupId,
+                file: {
+                    value: stream,
+                    options: { 
+                        filename,
+                        contentType, 
+                    },
+                },
+            },
+            json: true,
+            timeout: 60000,
+			rejectUnauthorized: false,
+        });
 
-		// Handle binary data
-		const binaryPropertyName = 'data';
-		const currentItem = items[itemIndex];
-		const binaryData = currentItem?.binary;
+        returnData.push(response);
+    }
 
-		if (binaryData && binaryData[binaryPropertyName]) {
-			const actualBinaryData = binaryData[binaryPropertyName] as IDataObject;
-			formData.file = {
-				value: Buffer.from(actualBinaryData.data as string, 'base64'),
-				options: {
-					filename: actualBinaryData.fileName || 'group_image.jpg',
-				},
-			};
-		} else {
-			// Read from file system
-			const fs = require('fs');
-			const path = require('path');
-			const fileName = path.basename(filePath);
-
-			try {
-				const fileContent = fs.readFileSync(filePath);
-				formData.file = {
-					value: fileContent,
-					options: {
-						filename: fileName,
-					},
-				};
-			} catch (readError) {
-				throw new NodeOperationError(
-					this.getNode(),
-					`Failed to read group image file: ${(readError as Error).message}`,
-					{ itemIndex }
-				);
-			}
-		}
-
-		const options = {
-			method: 'POST',
-			uri: `https://api.green-api.com/waInstance${instanceId}/setGroupPicture/${apiTokenInstance}`,
-			formData,
-			json: true,
-		};
-
-		return await this.helpers.request(options as JsonObject);
+    return returnData;
 }
-*/

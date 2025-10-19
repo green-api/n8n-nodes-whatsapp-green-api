@@ -103,8 +103,8 @@ export const groupOperations: INodeProperties[] = [
         },
     },
     {
-		displayName: 'Group Image',
-		name: 'file',
+		displayName: 'filePath',
+		name: 'filePath',
 		type: 'string',
 		default: '',
 		required: true,

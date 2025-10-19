@@ -174,7 +174,6 @@ export class GreenapiTrigger implements INodeType {
     }
     
     async webhook(this: IWebhookFunctions): Promise<IWebhookResponseData> {
-	
 		const typeWebhook = [
 			'incomingMessageReceived', 
 			'outgoingAPIMessageReceived', 
@@ -191,17 +190,16 @@ export class GreenapiTrigger implements INodeType {
 		const chosenTypeWebhook = this.getNodeParameter('webhookType', []) as string[];
 
 		if ((Array.isArray(chosenTypeWebhook) && chosenTypeWebhook.includes(thisTypeWebhook)) || (chosenTypeWebhook.length === 0) && typeWebhook.includes(thisTypeWebhook)){
-
 			const chatType = this.getNodeParameter('chatType') as string;
 			const thisMessageChatType = ((data[0].json as any).senderData.chatId).slice(-4) as string;
 			let thisChatType!: string;
+
 			if(thisMessageChatType === 'c.us'){
 				thisChatType = 'chatReceiveRestriction'
 			}
 			if(thisMessageChatType === 'g.us'){
 				thisChatType = 'groupReceiveRestriction'
 			}
-
 			const chatsCollection = this.getNodeParameter('chatIds', 0, {}) as {
 				chatId: { chatId: string }[];
 			};

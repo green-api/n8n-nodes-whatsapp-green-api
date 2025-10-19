@@ -18,6 +18,7 @@ export const accountOperations: INodeProperties[] = [
 			{ name: 'Get WhatsApp Settings', value: 'getWaSettings', action: 'Get information about the account' },
 			{ name: 'Logout', value: 'logout', action: 'Logout instance' },
 			{ name: 'Reboot', value: 'reboot', action: 'Reboot instance' },
+			{ name: 'Set Profile Picture', value: 'setProfilePicture', action: 'Set Profile Picture'},
 		],
 		default: 'getWaSettings',
 	},

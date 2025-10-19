@@ -1,26 +1,167 @@
-![Banner image](https://user-images.githubusercontent.com/10284570/173569848-c624317f-42b1-45a6-ab09-f0ea3c247648.png)
-
 # n8n-nodes-greenapi
 
-The node allows integration with Green API for sending WhatsApp messages and listening to incoming webhooks.
+Integration node for [Green API](https://green-api.com/) in [n8n](https://n8n.io).  
+This community node allows automation of WhatsApp interactions using Green API — including messaging, file transfer, contacts, groups, statuses, and instance management.
 
-It provides the following resources:
+---
 
-- **Messages**: send text messages, media messages, polls, and button messages  
-- **Journals**: retrieve the history of incoming and outgoing messages, as well as chat history  
-- **Contacts**: get the list of contacts, group participants, and check if a phone number is registered on WhatsApp  
-- **Trigger**: listen to incoming webhooks with advanced filters  
+## 📖 Overview
 
-## More information
+The **GreenAPI Node** provides full access to Green API endpoints, enabling you to send messages, manage chats, groups, and retrieve account information.
 
-- Please refer to the GREEN-API documentation at [https://green-api.com/en/docs/](https://green-api.com/en/docs/)
+---
 
-- To connect an instance, it must be authorized. You can authorize the instance in your Green-API console
+## Installation
+### Install community node
+Go to `Settings` → `Community Nodes` → `Install`, then enter `n8n-nodes-greenapi`
 
-- To enable triggers, specify *WEBHOOK_URL* in the .env file
 
-- If you notice any issues with the integration, please report them to Green-API support
+### Install via npm
+```bash
+npm install n8n-nodes-greenapi
+```
 
-## License
+Restart n8n after installation.
 
-[MIT](https://github.com/n8n-io/n8n-nodes-starter/blob/master/LICENSE.md)
+### Manual installation
+1. Copy repository into `~/.n8n/custom/`
+2. Run:
+   ```bash
+   npm install
+   npm run build
+   ```
+3. Restart n8n
+
+---
+
+You can also check out the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation.
+
+---
+
+## Authentication
+
+To use this node, you need to have an instance and token from [Green-API](https://green-api.com/en) platform and WhatsApp account:
+
+- Sign up at [Green-API](https://green-api.com/en)
+- Create an instance
+- Get idInstance and apiTokenInstance
+- Authorize the instance in the [Console](https://console.green-api.com/instanceList)
+
+## 🧩 Features
+
+| Category | Methods |
+|-----------|----------|
+| 👤 **Account** | getSettings, setSettings, getStateInstance, reboot, logout, setProfilePicture, getWaSettings |
+| ✉️ **Sending** | sendMessage, sendPoll, sendFileByUrl, sendFileByUpload, uploadFile, sendLocation, sendContact, forwardMessages, sendInteractiveButtons, sendInteractiveButtonsReply |
+| 📥 **Receiving** | webhookTrigger, downloadFile |
+| 📜 **Journals** | getChatHistory, getMessage, lastIncomingMessages, lastOutgoingMessages |
+| 🧾 **Queues** | showMessagesQueue, clearMessagesQueue |
+| 👥 **Groups** | createGroup, updateGroupName, getGroupData, addGroupParticipant, deleteGroupParticipant, setGroupAdmin, removeGroupAdmin, setGroupPicture, leaveGroup |
+| 📣 **Statuses** | sendTextStatus, sendVoiceStatus, sendMediaStatus, deleteStatus, getStatusStatistic, getIncomingStatuses, getOutgoingStatuses |
+| ✅ **Readmark** | readChat |
+| 🧩 **Service** | getContacts, getContactInfo, editMessage, deleteMessage, archiveChat, unarchiveChat, setDisappearingChat |
+
+---
+
+## ⚙️ Usage Examples
+
+### 💬 Send Message
+```json
+{
+  "operation": "sendMessage",
+  "chatId": "79001234567@c.us",
+  "message": "Hello from n8n and Green API!"
+}
+```
+
+### 📎 Send File by URL
+```json
+{
+  "operation": "sendFileByUrl",
+  "chatId": "79001234567@c.us",
+  "urlFile": "https://example.com/image.jpg",
+  "fileName": "photo.jpg"
+}
+```
+
+### 📣 Send Text Status
+```json
+{
+  "operation": "sendTextStatus",
+  "message": "Working with Green-API and n8n!",
+  "backgroundColor": "#228B22",
+  "font": "SERIF",
+  "participants": []
+}
+```
+
+### 📤 Send Interactive Buttons Reply
+```json
+{
+  "operation": "sendInteractiveButtonsReply",
+  "chatId": "79001234567@c.us",
+  "header": "",
+  "body": "Do you confirm the appointment for tomorrow?",
+  "footer": "",
+  "buttons": [
+        {
+            "buttonId": "1",
+            "buttonText": "Yes"
+        },
+        {
+            "buttonId": "2",
+            "buttonText": "No"
+        }
+    ]
+}
+```
+
+### 👥 Create Group
+```json
+{
+  "operation": "createGroup",
+  "groupName": "My Team",
+  "participants": ["79001234567@c.us", "79007654321@c.us"]
+}
+```
+
+### 🧭 Send Location
+```json
+{
+  "operation": "sendLocation",
+  "chatId": "79001234567@c.us",
+  "latitude": 40.7128,
+  "longitude": -74.0060,
+  "name": "New York",
+  "address": "NY, USA"
+}
+```
+
+### 🔄 Check Whatsapp
+```json
+{
+  "operation": "checkWhatsapp",
+  "phoneNumber": 79000000000
+}
+```
+---
+
+## 🔗 Resources
+
+- 🌐 [Green API Documentation](https://green-api.com/en/docs/)
+- 📘 [n8n Documentation](https://docs.n8n.io)
+- 💬 [n8n Community Forum](https://community.n8n.io)
+
+---
+
+## 👤 Author
+
+Developed by [Green API](https://green-api.com/)  
+📧 support@green-api.com  
+🌍 https://green-api.com/en/
+
+---
+
+## 🪪 License
+
+[MIT License](LICENSE)

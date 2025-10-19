@@ -5,6 +5,7 @@ import { getStateInstanceFields } from './fields/getStateInstance';
 import { getWaSettingsFields } from './fields/getWaSettings';
 import { logoutFields } from './fields/logout';
 import { rebootFields } from './fields/reboot';
+import { setProfilePictureFields } from './fields/setProfilePicture';
 
 export const accountDescription = [
 	...accountOperations,
@@ -14,4 +15,5 @@ export const accountDescription = [
 	...getWaSettingsFields,
 	...logoutFields,
 	...rebootFields,
+	...setProfilePictureFields,
 ];
