@@ -165,7 +165,7 @@ export class GreenapiTrigger implements INodeType {
                     method: 'POST',
                     uri: `https://api.green-api.com/waInstance${credentials.idInstance}/setSettings/${credentials.apiTokenKey}`,
                     body: {
-                        //webhookUrl: "", //насколько нужно удалять вебхук... хмммм... наверное, не нужно
+                        //webhookUrl: "",
                     },
                     json: true,
                 });
@@ -207,8 +207,20 @@ export class GreenapiTrigger implements INodeType {
 			const thisChatWebhook = (data[0].json as any).senderData.chatId as string; 
 
 			if (((Array.isArray(chats) && chats.includes(thisChatWebhook)) || (chats.length === 0)) && ((chatType === thisChatType) || (chatType === 'noReceiveRestriction'))){ 
+				if (thisTypeWebhook === 'incomingMessageReceived') {
+					const messageData = (data[0].json as any).messageData;
+					let unifiedMessageText = '';
+
+					if (messageData.typeMessage === 'textMessage') {
+						unifiedMessageText = messageData.textMessageData.textMessage;
+					} else if (messageData.typeMessage === 'extendedTextMessage') {
+						unifiedMessageText = messageData.extendedTextMessageData.text;
+					}
+
+					data[0].json.unifiedMessageText = unifiedMessageText;
+				}
 				return {
-					workflowData: [this.helpers.returnJsonArray(body),],
+					workflowData: [data],
 					webhookResponse: 'OK',
 				};
 			}

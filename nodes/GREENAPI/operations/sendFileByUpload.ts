@@ -39,7 +39,7 @@ export async function sendFileByUpload(this: IExecuteFunctions, items: INodeExec
             },
             json: true,
             timeout: 60000,
-            rejectUnauthorized: false, // нарушение безопасности, исправить
+            rejectUnauthorized: false,
         });
         returnData.push(response);
     }

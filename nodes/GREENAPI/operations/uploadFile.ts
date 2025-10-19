@@ -31,7 +31,7 @@ export async function uploadFile(this: IExecuteFunctions, items: INodeExecutionD
             body: stream,
             json: true,
             timeout: 60000,
-            rejectUnauthorized: false, // нарушение безопасности, исправить
+            rejectUnauthorized: false,
         });
         returnData.push(response);
     }

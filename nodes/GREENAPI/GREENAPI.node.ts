@@ -65,8 +65,6 @@ import { removeAdmin } from './operations/removeAdmin';
 import { setGroupPicture } from './operations/setGroupPicture';
 import { leaveGroup } from './operations/leaveGroup';
 
-import { test } from './operations/test';
-
 import { sendTextStatus } from './operations/statusMethods';
 import { sendVoiceStatus } from './operations/statusMethods';
 import { sendMediaStatus } from './operations/statusMethods';
@@ -351,12 +349,6 @@ export class Greenapi implements INodeType {
 				responseData = await deleteNotification.call(this, items);
 				returnData.push(...responseData);
 				break;
-			
-
-			case 'test':
-				responseData = await test.call(this, items);
-				returnData.push(...responseData);
-				break;	
 		}
 		return [this.helpers.returnJsonArray(returnData)];	
 	}

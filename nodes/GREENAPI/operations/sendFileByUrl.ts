@@ -23,7 +23,6 @@ export async function sendFileByUrl(this: IExecuteFunctions, items: INodeExecuti
                 'fileName': fileName,
                 'urlFile': urlFile,
                 'quotedMessageId': quotedMessageId,
-				//'typingTime': typingTime,
             },
             json: true,
         });
