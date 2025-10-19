@@ -2,7 +2,7 @@ import { INodeProperties } from 'n8n-workflow';
 
 export const sendTextStatusFields: INodeProperties[] = [
     {
-        displayName: 'participants',
+        displayName: 'Participants',
         name: 'participants',
         type: 'fixedCollection',
         placeholder: 'Add participant',
@@ -13,11 +13,11 @@ export const sendTextStatusFields: INodeProperties[] = [
         required: true,
         options: [
             {
-                displayName: 'participant',
+                displayName: 'Participant',
                 name: 'participant',
                 values: [
                     {
-                        displayName: 'participant',
+                        displayName: 'Participant',
                         name: 'participantText',
                         type: 'string',
                         default: '',
@@ -34,7 +34,7 @@ export const sendTextStatusFields: INodeProperties[] = [
         },
     },
     {
-		displayName: 'message',
+		displayName: 'Message',
 		name: 'message',
 		type: 'string',
 		placeholder: 'Your message',
@@ -50,7 +50,7 @@ export const sendTextStatusFields: INodeProperties[] = [
     {
 		displayName: 'backgroundColor',
 		name: 'backgroundColor',
-		type: 'string',
+		type: 'color',
 		placeholder: '#228B22',
 		default: '',
 		displayOptions: {
@@ -62,7 +62,7 @@ export const sendTextStatusFields: INodeProperties[] = [
 		required: true,
 	},
     {
-		displayName: 'font',
+		displayName: 'Font',
 		name: 'font',
 		type: 'string',
 		placeholder: 'SERIF',

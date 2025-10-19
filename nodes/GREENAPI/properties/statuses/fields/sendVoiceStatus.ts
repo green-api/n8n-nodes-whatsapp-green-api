@@ -2,7 +2,7 @@ import { INodeProperties } from 'n8n-workflow';
 
 export const sendVoiceStatusFields: INodeProperties[] = [
     {
-        displayName: 'participants',
+        displayName: 'Participants',
         name: 'participants',
         type: 'fixedCollection',
         placeholder: 'Add participant',
@@ -13,11 +13,11 @@ export const sendVoiceStatusFields: INodeProperties[] = [
         required: true,
         options: [
             {
-                displayName: 'participant',
+                displayName: 'Participant',
                 name: 'participant',
                 values: [
                     {
-                        displayName: 'participant',
+                        displayName: 'Participant',
                         name: 'participantText',
                         type: 'string',
                         default: '',
@@ -64,7 +64,7 @@ export const sendVoiceStatusFields: INodeProperties[] = [
     {
 		displayName: 'backgroundColor',
 		name: 'backgroundColor',
-		type: 'string',
+		type: 'color',
 		placeholder: '#228B22',
 		default: '',
 		displayOptions: {

@@ -13,6 +13,6 @@ export const receiveNotificationFields: INodeProperties[] = [
                 operation:['receiveNotification',],
             },
         },
-        required: false,
+
     },
 ]

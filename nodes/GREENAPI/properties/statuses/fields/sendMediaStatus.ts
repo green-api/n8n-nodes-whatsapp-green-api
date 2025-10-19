@@ -2,7 +2,7 @@ import { INodeProperties } from 'n8n-workflow';
 
 export const sendMediaStatusFields: INodeProperties[] = [
     {
-        displayName: 'participants',
+        displayName: 'Participants',
         name: 'participants',
         type: 'fixedCollection',
         placeholder: 'Add participant',
@@ -13,11 +13,11 @@ export const sendMediaStatusFields: INodeProperties[] = [
         required: true,
         options: [
             {
-                displayName: 'participant',
+                displayName: 'Participant',
                 name: 'participant',
                 values: [
                     {
-                        displayName: 'participant',
+                        displayName: 'Participant',
                         name: 'participantText',
                         type: 'string',
                         default: '',
@@ -62,7 +62,7 @@ export const sendMediaStatusFields: INodeProperties[] = [
         required: true,
     },
     {
-        displayName: 'caption',
+        displayName: 'Caption',
         name: 'caption',
         type: 'string',
         placeholder: 'Your status caption',

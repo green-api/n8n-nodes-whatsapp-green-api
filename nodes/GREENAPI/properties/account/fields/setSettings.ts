@@ -1,11 +1,11 @@
 import { INodeProperties } from 'n8n-workflow';
-
+/* eslint-disable no-console */
 export const setSettingsFields: INodeProperties[] = [
     {
-        displayName: 'settings',
+        displayName: 'Settings',
         name: 'settings',
         type: 'collection',
-        default: '',
+        default: {},
         options: [
             {
                 displayName: 'webhookUrl',
@@ -18,6 +18,7 @@ export const setSettingsFields: INodeProperties[] = [
                 displayName: 'webhookUrlToken',
                 name: 'webhookUrlToken',
                 type: 'string',
+				typeOptions: { password: true },
                 default: '',
                 description: 'Token to access your notification server',
             },
@@ -27,83 +28,83 @@ export const setSettingsFields: INodeProperties[] = [
                 type: 'number',
                 placeholder: 'Recommended 15000',
                 default: 15000,
-                description: 'Message sending delay is in milliseconds. Recommended value: 15000',
+                description: 'Message sending delay is in milliseconds. Recommended value: 15000.',
             },
             {
                 displayName: 'markIncomingMessagesReaded',
                 name: 'markIncomingMessagesReaded',
                 type: 'boolean',
-                default: '',
+                default: false,
                 description: 'Mark incoming messages read on reply from API',
             },
             {
                 displayName: 'outgoingWebhook',
                 name: 'outgoingWebhook',
                 type: 'boolean',
-                default: '',
+                default: false,
                 description: 'Receive notifications about outgoing messages statuses',
             },
             {
                 displayName: 'outgoingMessageWebhook',
                 name: 'outgoingMessageWebhook',
                 type: 'boolean',
-                default: '',
+                default: false,
                 description: 'Receive notifications about messages sent from the phone',
             },
             {
                 displayName: 'outgoingAPIMessageWebhook',
                 name: 'outgoingAPIMessageWebhook',
                 type: 'boolean',
-                default: '',
+                default: false,
                 description: 'Receive notifications about messages sent from API',
             },
             {
                 displayName: 'stateWebhook',
                 name: 'stateWebhook',
                 type: 'boolean',
-                default: '',
+                default: false,
                 description: 'Receive notifications about the instance authorization state change',
             },
             {
                 displayName: 'incomingWebhook',
                 name: 'incomingWebhook',
                 type: 'boolean',
-                default: '',
+                default: false,
                 description: 'Receive notifications about incoming messages and files',
             },
             {
                 displayName: 'keepOnlineStatus',
                 name: 'keepOnlineStatus',
                 type: 'boolean',
-                default: '',
+                default: false,
                 description: 'Keep "online" status',
             },            
             {
                 displayName: 'pollMessageWebhook',
                 name: 'pollMessageWebhook',
                 type: 'boolean',
-                default: '',
+                default: false,
                 description: 'Receive notifications about polls',
             },            
             {
                 displayName: 'incomingCallWebhook',
                 name: 'incomingCallWebhook',
                 type: 'boolean',
-                default: '',
+                default: false,
                 description: 'Receive notifications about incoming calls',
             },            
             {
                 displayName: 'editedMessageWebhook',
                 name: 'editedMessageWebhook',
                 type: 'boolean',
-                default: '',
+                default: false,
                 description: 'Receive notifications about edited messages',
             },
             {
                 displayName: 'deletedMessageWebhook',
                 name: 'deletedMessageWebhook',
                 type: 'boolean',
-                default: '',
+                default: false,
                 description: 'Receive notifications about deleted messages',
             },
         ],
@@ -116,3 +117,4 @@ export const setSettingsFields: INodeProperties[] = [
         required: true,
     },
 ];
+/* eslint-enable no-console */

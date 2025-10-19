@@ -12,7 +12,7 @@ export const receivingOperations: INodeProperties[] = [
             },
         },
         options: [
-            { name: 'Download a File', value: 'downloadFile', action: 'Download a File' },
+            { name: 'Download a File', value: 'downloadFile', action: 'Download a file' },
             //{ name: 'Receive a notification', value: 'receiveNotification', action: 'Receive a notification' },
             //{ name: 'Delete a notification', value: 'deleteNotification', action: 'Delete a notification' },
         ],

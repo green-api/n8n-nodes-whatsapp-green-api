@@ -6,7 +6,6 @@ import { journalOperations } from './journal';
 import { serviceOperations } from './service';
 import { groupOperations } from './group';
 import { statusesDescription } from './statuses/statuses.description';
-import { testOperations } from './test';
 import { receivingOperations } from './receiving/receivingOperations';
 
 export const baseProperties: INodeProperties[] = [
@@ -21,9 +20,8 @@ export const baseProperties: INodeProperties[] = [
 			{ name: 'Queue', value: 'queue' },
 			{ name: 'Sending', value: 'sending' },
 			{ name: 'Service', value: 'service' },
-			{ name: 'Statuses', value: 'statuses' },
+			{ name: 'Status', value: 'statuses' },
 			{ name: 'Receiving', value: 'receiving' },
-			{ name: 'test', value: 'testing' },
 		],
 		noDataExpression: true,
 		required: true,
@@ -41,7 +39,6 @@ export const properties: INodeProperties[] = [
 	...groupOperations,
 	...statusesDescription,
 	...receivingOperations,
-	...testOperations,
 ];
 
 export default properties;

@@ -21,7 +21,7 @@ export const sendingOperations: INodeProperties[] = [
 			{ name: 'sendLocation', value: 'sendLocation', action: 'Send a location' },
 			{ name: 'sendMessage', value: 'sendMessage', action: 'Send message' },
 			{ name: 'sendPoll', value: 'sendPoll', action: 'Send poll' },
-			{ name: 'uploadFile', value: 'uploadFile', action: 'Upload File' },
+			{ name: 'uploadFile', value: 'uploadFile', action: 'Upload file' },
 		],
 		default: 'sendMessage',
 	},
@@ -74,7 +74,7 @@ export const sendingOperations: INodeProperties[] = [
 		name: 'caption',
 		type: 'string',
 		default: '',
-		required: false,
+
 		displayOptions: {
 			show: {
 				operation: ['sendFileByUrl', 'sendFileByUpload'],
