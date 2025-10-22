@@ -1,6 +1,6 @@
 {
-  "name": "n8n-nodes-greenapi",
-  "version": "0.1.8",
+  "name": "n8n-nodes-whatsapp-green-api",
+  "version": "0.2.0",
   "description": "n8n node for Green-API for WhatsApp",
   "keywords": [
     "n8n-community-node-package",
@@ -11,12 +11,12 @@
   "license": "MIT",
   "homepage": "",
   "author": {
-    "name": "nostalgiaCode",
-    "email": "nowelywork@gmail.com"
+    "name": "GREEN API",
+    "email": "support@green-api.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nostalgiaCode/n8n-nodes-greenapi.git"
+    "url": "https://github.com/green-api/n8n-nodes-whatsapp-green-api.git"
   },
   "main": "dist/index.js",
   "scripts": {
