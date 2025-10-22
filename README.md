@@ -13,12 +13,12 @@ The **GreenAPI Node** provides full access to Green API endpoints, enabling you 
 
 ## Installation
 ### Install community node
-Go to `Settings` → `Community Nodes` → `Install`, then enter `n8n-nodes-greenapi`
+Go to `Settings` → `Community Nodes` → `Install`, then enter `n8n-nodes-whatsapp-green-api`
 
 
 ### Install via npm
 ```bash
-npm install n8n-nodes-greenapi
+npm install n8n-nodes-whatsapp-green-api
 ```
 
 Restart n8n after installation.
