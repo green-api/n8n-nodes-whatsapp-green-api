@@ -1,0 +1,104 @@
+import { INodeProperties } from 'n8n-workflow';
+
+export const groupOperations: INodeProperties[] = [
+    {
+        displayName: 'Operation',
+        name: 'operation',
+        type: 'options',
+        noDataExpression: true,
+        displayOptions: {
+            show: {
+                resource: ['group'],
+            },
+        },
+        options: [
+            { name: 'addGroupParticipant', value: 'addGroupParticipant', action: 'Add group participant' },
+            { name: 'createGroup', value: 'createGroup', action: 'Create a group' },
+            { name: 'getGroupData', value: 'getGroupData', action: 'Get group data' },
+            { name: 'leaveGroup', value: 'leaveGroup', action: 'Leave group' },
+            { name: 'removeAdmin', value: 'removeAdmin', action: 'Remove group admin' },
+            { name: 'removeGroupParticipant', value: 'removeGroupParticipant', action: 'Remove group participant' },
+            { name: 'setGroupAdmin', value: 'setGroupAdmin', action: 'Set group admin' },
+            { name: 'updateGroupName', value: 'updateGroupName', action: 'Update group name' },
+        ],
+        default: 'getGroupData',
+    },
+    
+    {
+        displayName: 'groupId',
+        name: 'groupId',
+        placeholder: '12345678901234567890@g.us',
+        type: 'string',
+        default: '',
+        displayOptions: {
+            show: {
+                resource: ['group',],
+                operation: ['updateGroupName', 'getGroupData', 'addGroupParticipant', 'removeGroupParticipant', 
+                    'setGroupAdmin', 'removeAdmin', 'leaveGroup']
+            },
+        },
+        required: true,
+    },
+
+    {
+        displayName: 'groupName',
+        name: 'groupName',
+        placeholder: 'Group name',
+        type: 'string',
+        default: '',
+        displayOptions: {
+            show: {
+                resource: ['group',],
+                operation: ['createGroup', 'updateGroupName',]
+            },
+        },
+        required: true,
+    },
+
+    {
+        displayName: 'participantChatId',
+        name: 'participantChatId',
+        placeholder: '79000000000@c.us',
+        type: 'string',
+        default: '',
+        displayOptions: {
+            show: {
+                resource: ['group',],
+                operation: ['addGroupParticipant', 'updateGroupName', 'addGroupParticipant', 'removeGroupParticipant', 'setGroupAdmin', 'removeAdmin',]
+            },
+        },
+        required: true,
+    },
+    {
+        displayName: 'chatIds',
+        name: 'chatIds',
+        type: 'fixedCollection',
+        placeholder: 'Add chatId',
+        default: {},
+        typeOptions: {
+            multipleValues: true,
+        },
+        required: true,
+        options: [
+            {
+                displayName: 'chatId',
+                name: 'chatId',
+                values: [
+                    {
+                        displayName: 'chatId',
+                        name: 'chatIdText',
+                        type: 'string',
+                        default: '',
+                        placeholder: '79000000000@c.us',
+                    },
+                ],
+            },
+        ],
+        displayOptions: {
+            show: {
+                resource: ['group',],
+                operation: ['createGroup'],
+            },
+        },
+    },
+];
