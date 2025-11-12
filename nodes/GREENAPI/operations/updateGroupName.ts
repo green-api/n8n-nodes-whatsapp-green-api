@@ -11,7 +11,7 @@ export async function updateGroupName(this: IExecuteFunctions, items: INodeExecu
             apiTokenKey: string;
         };
 
-        const response = await this.helpers.request({
+        const response = await this.helpers.httpRequest({
             method: 'POST',
             url: `https://api.green-api.com/waInstance${credentials.idInstance}/updateGroupName/${credentials.apiTokenKey}`,
             headers: { 'Content-Type': 'application/json' },

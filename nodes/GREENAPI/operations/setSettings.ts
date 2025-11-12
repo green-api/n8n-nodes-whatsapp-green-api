@@ -35,7 +35,7 @@ export async function setSettings(this: IExecuteFunctions, items: INodeExecution
                 body[cleanKey] = typeof value === 'boolean' ? (value ? 'yes' : 'no') : value;
             }
         }
-        const response = await this.helpers.request({
+        const response = await this.helpers.httpRequest({
             method: 'POST',
             url: `https://api.green-api.com/waInstance${credentials.idInstance}/setSettings/${credentials.apiTokenKey}`,
             headers: { 'Content-Type': 'application/json' },

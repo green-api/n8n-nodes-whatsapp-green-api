@@ -10,7 +10,7 @@ export async function getContactInfo(this: IExecuteFunctions, items: INodeExecut
             apiTokenKey: string;
         };
 
-        const response = await this.helpers.request({
+        const response = await this.helpers.httpRequest({
             method: 'POST',
             url: `https://api.green-api.com/waInstance${credentials.idInstance}/GetContactInfo/${credentials.apiTokenKey}`,
             headers: { 'Content-Type': 'application/json' },

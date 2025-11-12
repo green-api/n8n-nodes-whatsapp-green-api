@@ -32,7 +32,7 @@ export async function createGroup(this: IExecuteFunctions, items: INodeExecution
         const chatIds = transformChatIds(chatIdsRaw);
 
         
-        const response = await this.helpers.request({
+        const response = await this.helpers.httpRequest({
             method: 'POST',
             url: `https://api.green-api.com/waInstance${credentials.idInstance}/createGroup/${credentials.apiTokenKey}`,
             headers: { 'Content-Type': 'application/json' },

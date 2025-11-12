@@ -4,28 +4,41 @@ export async function sendMessage(this: IExecuteFunctions, items: INodeExecution
 	const returnData: INodeExecutionData[] = [];
 
 	for (let i = 0; i < items.length; i++) {
-		const chatId = this.getNodeParameter('chatId', i, '') as string;
-		const message = this.getNodeParameter('message', i, '') as string;
-		const quotedMessageId = this.getNodeParameter('quotedMessageId', i, '') as string;
-		const credentials = await this.getCredentials('greenApiAuthApi') as {
-			idInstance: string;
-			apiTokenKey: string;
-		};
+		try {
+			const chatId = this.getNodeParameter('chatId', i, '') as string;
+			const message = this.getNodeParameter('message', i, '') as string;
+			const quotedMessageId = this.getNodeParameter('quotedMessageId', i, '') as string;
+			const typingTime = this.getNodeParameter('typingTime', i, '') as number;
+			const credentials = await this.getCredentials('greenApiAuthApi') as {
+				idInstance: string;
+				apiTokenKey: string;
+			};
 
-		const response = await this.helpers.request({
-			method: 'POST',
-			url: `https://api.green-api.com/waInstance${credentials.idInstance}/sendMessage/${credentials.apiTokenKey}`,
-			headers: { 'Content-Type': 'application/json' },
-			body: {
-                    'chatId': chatId,
-                    'message': message,
-					'quotedMessageId': quotedMessageId,
-                },
-			json: true,
-		});
-
-		returnData.push(response);
+			const response = await this.helpers.httpRequest({
+				method: 'POST',
+				url: `https://api.green-api.com/waInstance${credentials.idInstance}/sendMessage/${credentials.apiTokenKey}`,
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: {
+					chatId,
+					message,
+					quotedMessageId,
+					typingTime,
+				},
+				json: true,
+			});
+			returnData.push(response);
+		} catch (error) {
+			this.logger.error('GREEN-API request failed', { error: error.message });
+			returnData.push({
+				json: {
+					error: 'Failed to send message',
+					details: error.message,
+				},
+				pairedItem: { item: i },
+			});
+		}
 	}
-
 	return returnData;
 }

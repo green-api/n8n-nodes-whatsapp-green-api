@@ -10,7 +10,7 @@ export async function unarchiveChat(this: IExecuteFunctions, items: INodeExecuti
             apiTokenKey: string;
         };
 
-        const response = await this.helpers.request({
+        const response = await this.helpers.httpRequest({
             method: 'POST',
             url: `https://api.green-api.com/waInstance${credentials.idInstance}/unarchiveChat/${credentials.apiTokenKey}`,
             headers: { 'Content-Type': 'application/json' },

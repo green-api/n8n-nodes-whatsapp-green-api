@@ -13,7 +13,7 @@ export async function lastOutgoingMessages(this: IExecuteFunctions, items: INode
         let url = `https://api.green-api.com/waInstance${credentials.idInstance}/lastOutgoingMessages/${credentials.apiTokenKey}`;
         if (minutes) {url = url + '?minutes=' + minutes}
 
-        const response = await this.helpers.request({
+        const response = await this.helpers.httpRequest({
             method: 'GET',
             url:  url,
             headers: { 'Content-Type': 'application/json' },

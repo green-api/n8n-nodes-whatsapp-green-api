@@ -9,7 +9,7 @@ export async function showMessagesQueue(this: IExecuteFunctions, items: INodeExe
             apiTokenKey: string;
         };
 
-        const response = await this.helpers.request({
+        const response = await this.helpers.httpRequest({
             method: 'GET',
             url: `https://api.green-api.com/waInstance${credentials.idInstance}/showMessagesQueue/${credentials.apiTokenKey}`,
             headers: { 'Content-Type': 'application/json' },

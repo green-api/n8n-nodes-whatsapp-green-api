@@ -32,7 +32,7 @@ export async function sendTextStatus(this: IExecuteFunctions, items: INodeExecut
         };
         const participants = transformParticipants(participantsRaw);
         
-        const response = await this.helpers.request({
+        const response = await this.helpers.httpRequest({
             method: 'POST',
             url: `https://api.green-api.com/waInstance${credentials.idInstance}/sendTextStatus/${credentials.apiTokenKey}`,
             headers: { 'Content-Type': 'application/json' },
@@ -67,7 +67,7 @@ export async function sendVoiceStatus(this: IExecuteFunctions, items: INodeExecu
         };
         const participants = transformParticipants(participantsRaw);
         
-        const response = await this.helpers.request({
+        const response = await this.helpers.httpRequest({
             method: 'POST',
             url: `https://api.green-api.com/waInstance${credentials.idInstance}/sendVoiceStatus/${credentials.apiTokenKey}`,
             headers: { 'Content-Type': 'application/json' },
@@ -101,7 +101,7 @@ export async function sendMediaStatus(this: IExecuteFunctions, items: INodeExecu
             participant?: { participant: string}[];
         };
         const participants = transformParticipants(participantsRaw);
-        const response = await this.helpers.request({
+        const response = await this.helpers.httpRequest({
             method: 'POST',
             url: `https://api.green-api.com/waInstance${credentials.idInstance}/sendMediaStatus/${credentials.apiTokenKey}`,
             headers: { 'Content-Type': 'application/json' },
@@ -130,7 +130,7 @@ export async function deleteStatus(this: IExecuteFunctions, items: INodeExecutio
             apiTokenKey: string;
         };
 
-        const response = await this.helpers.request({
+        const response = await this.helpers.httpRequest({
             method: 'POST',
             url: `https://api.green-api.com/waInstance${credentials.idInstance}/deleteStatus/${credentials.apiTokenKey}`,
             headers: { 'Content-Type': 'application/json' },
@@ -156,7 +156,7 @@ export async function getStatusStatistic(this: IExecuteFunctions, items: INodeEx
             apiTokenKey: string;
         };
 
-        const response = await this.helpers.request({
+        const response = await this.helpers.httpRequest({
             method: 'GET',
             url: `https://api.green-api.com/waInstance${credentials.idInstance}/getStatusStatistic/${credentials.apiTokenKey}`,
             headers: { 'Content-Type': 'application/json' },
@@ -184,7 +184,7 @@ export async function getOutgoingStatuses(this: IExecuteFunctions, items: INodeE
         let url = `https://api.green-api.com/waInstance${credentials.idInstance}/getOutgoingStatuses/${credentials.apiTokenKey}`;
         if (minutes) {url = url + '?minutes=' + minutes}
 
-        const response = await this.helpers.request({
+        const response = await this.helpers.httpRequest({
             method: 'GET',
             url:  url,
             headers: { 'Content-Type': 'application/json' },
@@ -210,7 +210,7 @@ export async function getIncomingStatuses(this: IExecuteFunctions, items: INodeE
         let url = `https://api.green-api.com/waInstance${credentials.idInstance}/getIncomingStatuses/${credentials.apiTokenKey}`;
         if (minutes) {url = url + '?minutes=' + minutes}
 
-        const response = await this.helpers.request({
+        const response = await this.helpers.httpRequest({
             method: 'GET',
             url:  url,
             headers: { 'Content-Type': 'application/json' },

@@ -11,7 +11,7 @@ export async function removeAdmin(this: IExecuteFunctions, items: INodeExecution
             apiTokenKey: string;
         };
 
-        const response = await this.helpers.request({
+        const response = await this.helpers.httpRequest({
             method: 'POST',
             url: `https://api.green-api.com/waInstance${credentials.idInstance}/removeAdmin/${credentials.apiTokenKey}`,
             headers: { 'Content-Type': 'application/json' },

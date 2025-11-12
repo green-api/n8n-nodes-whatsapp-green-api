@@ -17,7 +17,7 @@ export async function readChat(this: IExecuteFunctions, items: INodeExecutionDat
             body['idMessage']=idMessage;
         }
 
-        const response = await this.helpers.request({
+        const response = await this.helpers.httpRequest({
             method: 'POST',
             url: `https://api.green-api.com/waInstance${credentials.idInstance}/readChat/${credentials.apiTokenKey}`,
             headers: { 'Content-Type': 'application/json' },

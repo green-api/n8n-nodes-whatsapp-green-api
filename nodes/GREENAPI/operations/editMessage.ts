@@ -12,7 +12,7 @@ export async function editMessage(this: IExecuteFunctions, items: INodeExecution
             apiTokenKey: string;
         };
 
-        const response = await this.helpers.request({
+        const response = await this.helpers.httpRequest({
             method: 'POST',
             url: `https://api.green-api.com/waInstance${credentials.idInstance}/editMessage/${credentials.apiTokenKey}`,
             headers: { 'Content-Type': 'application/json' },

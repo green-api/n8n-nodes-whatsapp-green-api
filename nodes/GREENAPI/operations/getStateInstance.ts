@@ -9,7 +9,7 @@ export async function getStateInstance(this: IExecuteFunctions, items: INodeExec
             apiTokenKey: string;
         };
 
-        const response = await this.helpers.request({
+        const response = await this.helpers.httpRequest({
             method: 'GET',
             url: `https://api.green-api.com/waInstance${credentials.idInstance}/getStateInstance/${credentials.apiTokenKey}`,
             headers: { 'Content-Type': 'application/json' },

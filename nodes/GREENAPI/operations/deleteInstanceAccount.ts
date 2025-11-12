@@ -9,7 +9,7 @@ export async function deleteInstanceAccount(this: IExecuteFunctions, items: INod
         };
         const idInstance = this.getNodeParameter('idInstance', i, '') as number;
 
-        const response = await this.helpers.request({
+        const response = await this.helpers.httpRequest({
             method: 'POST',
             url: `https://api.green-api.com/partner/deleteInstanceAccount/${credentials.partnerToken}`,
             headers: { 'Content-Type': 'application/json' },

@@ -9,7 +9,7 @@ export async function getSettings(this: IExecuteFunctions, items: INodeExecution
             apiTokenKey: string;
         };
 
-        const response = await this.helpers.request({
+        const response = await this.helpers.httpRequest({
             method: 'GET',
             url: `https://api.green-api.com/waInstance${credentials.idInstance}/getSettings/${credentials.apiTokenKey}`,
             headers: { 'Content-Type': 'application/json' },

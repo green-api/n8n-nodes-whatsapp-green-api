@@ -31,7 +31,7 @@ export async function forwardMessages(this: IExecuteFunctions, items: INodeExecu
             message?: { message: string}[];
         };
         const messages = transformChatIds(messagesRaw);
-        const response = await this.helpers.request({
+        const response = await this.helpers.httpRequest({
             method: 'POST',
             url: `https://api.green-api.com/waInstance${credentials.idInstance}/forwardMessages/${credentials.apiTokenKey}`,
             headers: { 'Content-Type': 'application/json' },

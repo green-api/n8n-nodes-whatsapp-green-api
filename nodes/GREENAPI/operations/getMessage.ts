@@ -11,7 +11,7 @@ export async function getMessage(this: IExecuteFunctions, items: INodeExecutionD
             apiTokenKey: string;
         };
 
-        const response = await this.helpers.request({
+        const response = await this.helpers.httpRequest({
             method: 'POST',
             url: `https://api.green-api.com/waInstance${credentials.idInstance}/getMessage/${credentials.apiTokenKey}`,
             headers: { 'Content-Type': 'application/json' },

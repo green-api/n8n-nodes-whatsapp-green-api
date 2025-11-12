@@ -132,9 +132,9 @@ export class GreenapiTrigger implements INodeType {
                 const credentials = await this.getCredentials('greenApiAuthApi');
                 const webhookUrl = this.getNodeWebhookUrl('default');
 
-                const response = await this.helpers.request({
+                const response = await this.helpers.httpRequest({
                     method: 'GET',
-                    uri: `https://api.green-api.com/waInstance${credentials.idInstance}/getSettings/${credentials.apiTokenKey}`,
+                    url: `https://api.green-api.com/waInstance${credentials.idInstance}/getSettings/${credentials.apiTokenKey}`,
                 });
 				return response.webhookUrl === webhookUrl;
             },
@@ -143,9 +143,9 @@ export class GreenapiTrigger implements INodeType {
                 const credentials = await this.getCredentials('greenApiAuthApi');  
 				const webhookUrl = this.getNodeWebhookUrl('default');
                 
-                await this.helpers.request({
+                await this.helpers.httpRequest({
                     method: 'POST',
-                    uri: `https://api.green-api.com/waInstance${credentials.idInstance}/setSettings/${credentials.apiTokenKey}`,
+                    url: `https://api.green-api.com/waInstance${credentials.idInstance}/setSettings/${credentials.apiTokenKey}`,
                     body: {
                         webhookUrl: webhookUrl,
 						incomingWebhook: 'yes',
@@ -159,9 +159,9 @@ export class GreenapiTrigger implements INodeType {
 			async delete(this: IHookFunctions): Promise<void> { 
                 const credentials = await this.getCredentials('greenApiAuthApi');
                 
-                await this.helpers.request({
+                await this.helpers.httpRequest({
                     method: 'POST',
-                    uri: `https://api.green-api.com/waInstance${credentials.idInstance}/setSettings/${credentials.apiTokenKey}`,
+                    url: `https://api.green-api.com/waInstance${credentials.idInstance}/setSettings/${credentials.apiTokenKey}`,
                     body: {
                         //webhookUrl: "",
                     },

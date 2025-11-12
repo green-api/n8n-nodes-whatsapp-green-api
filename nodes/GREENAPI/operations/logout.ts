@@ -9,7 +9,7 @@ export async function logout(this: IExecuteFunctions, items: INodeExecutionData[
             apiTokenKey: string;
         };
 
-        const response = await this.helpers.request({
+        const response = await this.helpers.httpRequest({
             method: 'GET',
             url: `https://api.green-api.com/waInstance${credentials.idInstance}/logout/${credentials.apiTokenKey}`,
             headers: { 'Content-Type': 'application/json' },

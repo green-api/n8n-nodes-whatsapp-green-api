@@ -7,7 +7,7 @@ export async function getInstances(this: IExecuteFunctions, items: INodeExecutio
         const credentials = await this.getCredentials('greenApiPartnerAuthApi') as {
             partnerToken: string;
         };
-        const response = await this.helpers.request({
+        const response = await this.helpers.httpRequest({
             method: 'POST',
             url: `https://api.green-api.com/partner/getInstances/${credentials.partnerToken}`,
             headers: { 'Content-Type': 'application/json' },

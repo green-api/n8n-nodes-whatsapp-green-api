@@ -8,7 +8,7 @@ export async function createInstance(this: IExecuteFunctions, items: INodeExecut
             partnerToken: string;
         };
 
-        const response = await this.helpers.request({
+        const response = await this.helpers.httpRequest({
             method: 'GET',
             url: `https://api.green-api.com/partner/createInstance/${credentials.partnerToken}`,
             headers: { 'Content-Type': 'application/json' },

@@ -5,8 +5,8 @@ import type {
 	INodeTypeDescription,
 } from 'n8n-workflow';
 import { NodeConnectionType } from 'n8n-workflow';
-import properties from './properties';
 
+import properties from './properties';
 
 
 //sending

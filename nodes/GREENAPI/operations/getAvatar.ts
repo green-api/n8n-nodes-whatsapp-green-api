@@ -10,7 +10,7 @@ export async function getAvatar(this: IExecuteFunctions, items: INodeExecutionDa
             apiTokenKey: string;
         };
 
-        const response = await this.helpers.request({
+        const response = await this.helpers.httpRequest({
             method: 'POST',
             url: `https://api.green-api.com/waInstance${credentials.idInstance}/getAvatar/${credentials.apiTokenKey}`,
             headers: { 'Content-Type': 'application/json' },

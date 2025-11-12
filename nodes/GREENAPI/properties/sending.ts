@@ -208,6 +208,19 @@ export const sendingOperations: INodeProperties[] = [
 		},
 	},
 	{
+		displayName: 'chatId',
+		name: 'chatId',
+		type: 'string',
+		default: '',
+		placeholder: '79000000000@c.us',
+		required: true,
+		displayOptions: {
+			show: {
+				operation: ['forwardMessages', 'sendMessage', 'sendFileByUrl', 'sendPoll', 'sendInteractiveButtons', 'sendInteractiveButtonsReply', 'sendContact', 'sendLocation'],
+			},
+		},
+	},
+	{
 		displayName: 'chatIdFrom',
 		name: 'chatIdFrom',
 		type: 'string',
@@ -440,6 +453,19 @@ export const sendingOperations: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				operation: ['sendPoll'],
+			},
+		},
+	},
+	{
+		displayName: 'typingTime',
+		name: 'typingTime',
+		type: 'number',
+		default: '',
+		placeholder: '5000',
+		required: false,
+		displayOptions: {
+			show: {
+				operation: ['sendMessage', 'sendFileByUrl', 'sendPoll', 'sendContact', 'sendLocation'],
 			},
 		},
 	},
