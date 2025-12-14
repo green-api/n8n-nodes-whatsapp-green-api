@@ -20,6 +20,7 @@ export const sendingOperations: INodeProperties[] = [
 			{ name: 'sendLocation', value: 'sendLocation', action: 'Send a location' },
 			{ name: 'sendMessage', value: 'sendMessage', action: 'Send message' },
 			{ name: 'sendPoll', value: 'sendPoll', action: 'Send poll' },
+			{ name: 'sendText', value: 'sendText', action: 'Send text' },
 		],
 		default: 'sendMessage',
 	},
@@ -45,7 +46,7 @@ export const sendingOperations: INodeProperties[] = [
 		required: true,
 		displayOptions: {
 			show: {
-				operation: ['sendMessage', 'sendPoll'],
+				operation: ['sendMessage', 'sendText', 'sendPoll'],
 			},
 		},
 	},
@@ -216,7 +217,7 @@ export const sendingOperations: INodeProperties[] = [
 		required: true,
 		displayOptions: {
 			show: {
-				operation: ['forwardMessages', 'sendMessage', 'sendFileByUrl', 'sendPoll', 'sendInteractiveButtons', 'sendInteractiveButtonsReply', 'sendContact', 'sendLocation'],
+				operation: ['forwardMessages', 'sendMessage', 'sendFileByUrl', 'sendPoll', 'sendInteractiveButtons', 'sendInteractiveButtonsReply', 'sendContact', 'sendText', 'sendLocation'],
 			},
 		},
 	},

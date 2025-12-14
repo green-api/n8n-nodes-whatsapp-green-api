@@ -8,6 +8,7 @@ import { NodeConnectionType } from 'n8n-workflow';
 
 import properties from './properties';
 
+import { sendText } from './operations/sendText';
 
 //sending
 import { sendMessage } from './operations/sendMessage';
@@ -101,6 +102,10 @@ export class Greenapi implements INodeType {
 		const operation = this.getNodeParameter('operation', 0) as string;
 
 		switch(operation){
+			case 'sendText':
+				responseData = await sendText.call(this, items);
+				returnData.push(...responseData);
+				break;
 			case 'sendMessage':
 				responseData = await sendMessage.call(this, items);
 				returnData.push(...responseData);

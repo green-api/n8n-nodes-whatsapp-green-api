@@ -1,4 +1,4 @@
-import { IExecuteFunctions, INodeExecutionData } from 'n8n-workflow';
+import { IExecuteFunctions, INodeExecutionData, NodeOperationError } from 'n8n-workflow';
 
 export async function sendMessage(this: IExecuteFunctions, items: INodeExecutionData[]) {
 	const returnData: INodeExecutionData[] = [];
@@ -30,15 +30,21 @@ export async function sendMessage(this: IExecuteFunctions, items: INodeExecution
 			});
 			returnData.push(response);
 		} catch (error) {
-			this.logger.error('GREEN-API request failed', { error: error.message });
-			returnData.push({
-				json: {
-					error: 'Failed to send message',
-					details: error.message,
-				},
-				pairedItem: { item: i },
+			if (this.continueOnFail()) {
+				returnData.push({
+					json: { error: error.message },
+					pairedItem: { item: i },
+				});
+				continue;
+			}
+
+			throw new NodeOperationError(this.getNode(), error as Error, {
+				description: error.description,
+				itemIndex: i,
 			});
 		}
 	}
+
 	return returnData;
 }
+
