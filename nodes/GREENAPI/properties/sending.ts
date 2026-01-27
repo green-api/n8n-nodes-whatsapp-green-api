@@ -21,6 +21,7 @@ export const sendingOperations: INodeProperties[] = [
 			{ name: 'sendMessage', value: 'sendMessage', action: 'Send message' },
 			{ name: 'sendPoll', value: 'sendPoll', action: 'Send poll' },
 			{ name: 'sendText', value: 'sendText', action: 'Send text' },
+			{ name: 'testFunc', value: 'testFunc', action: 'test'}
 		],
 		default: 'sendMessage',
 	},

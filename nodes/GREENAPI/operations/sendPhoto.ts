@@ -2,17 +2,17 @@ import { IExecuteFunctions, INodeExecutionData } from 'n8n-workflow';
 import { executePerItem } from '../helpers/executePerItem';
 import { getParams } from '../helpers/getParams';
 import { greenApiRequest } from '../helpers/request';
-import { PhotoMessageParams } from '../types/messages';
+import { sendFileByUrlParams } from '../types/sending';
 
 export async function sendPhoto(
   this: IExecuteFunctions,
   items: INodeExecutionData[],
 ) {
-  return executePerItem<PhotoMessageParams>(
+  return executePerItem<sendFileByUrlParams>(
     this,
     items,
     (i) =>
-      getParams<PhotoMessageParams>(this, i, {
+      getParams<sendFileByUrlParams>(this, i, {
         chatId: {},
         photo: {},
         caption: { default: '' },
@@ -20,7 +20,7 @@ export async function sendPhoto(
         typingTime: { default: 0 },
       }),
     (params) =>
-      greenApiRequest(this, 'sendFileByUrl', {
+      greenApiRequest(this, 'POST', 'sendFileByUrl', {
         chatId: params.chatId,
         urlFile: params.photo,
         caption: params.caption,

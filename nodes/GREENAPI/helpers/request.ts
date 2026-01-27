@@ -1,7 +1,8 @@
-import { IExecuteFunctions } from 'n8n-workflow';
+import { IExecuteFunctions, IHttpRequestMethods } from 'n8n-workflow';
 
 export async function greenApiRequest(
   ctx: IExecuteFunctions,
+  method: IHttpRequestMethods,
   endpoint: string,
   body: unknown,
 ) {
@@ -11,7 +12,7 @@ export async function greenApiRequest(
   };
 
   return ctx.helpers.httpRequest({
-    method: 'POST',
+    method: method,
     url: `https://api.green-api.com/waInstance${credentials.idInstance}/${endpoint}/${credentials.apiTokenKey}`,
     headers: {
       'Content-Type': 'application/json',

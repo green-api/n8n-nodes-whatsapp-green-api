@@ -19,7 +19,7 @@ export async function sendPoll(this: IExecuteFunctions, items: INodeExecutionDat
             };
 			const typingTime = this.getNodeParameter('typingTime', i, '') as number;
 			
-
+			
 			const response = await this.helpers.httpRequest({
 				method: 'POST',
 				url: `https://api.green-api.com/waInstance${credentials.idInstance}/sendPoll/${credentials.apiTokenKey}`,
