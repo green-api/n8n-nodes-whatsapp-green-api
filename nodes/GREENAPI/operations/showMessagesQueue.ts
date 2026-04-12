@@ -1,23 +1,11 @@
+// showMessagesQueue.ts
 import { IExecuteFunctions, INodeExecutionData } from 'n8n-workflow';
+import { executePerItem } from '../helpers/executePerItem';
+import { greenApiRequest } from '../helpers/request';
 
 export async function showMessagesQueue(this: IExecuteFunctions, items: INodeExecutionData[]) {
-    const returnData: INodeExecutionData[] = [];
-
-    for (let i = 0; i < items.length; i++) {
-        const credentials = await this.getCredentials('greenApiAuthApi') as {
-            idInstance: string;
-            apiTokenKey: string;
-        };
-
-        const response = await this.helpers.httpRequest({
-            method: 'GET',
-            url: `https://api.green-api.com/waInstance${credentials.idInstance}/showMessagesQueue/${credentials.apiTokenKey}`,
-            headers: { 'Content-Type': 'application/json' },
-            json: true,
-        });
-
-        returnData.push(response);
-    }
-    
-    return returnData;
+	return executePerItem(this, items,
+		() => ({}),
+		() => greenApiRequest(this, 'GET', 'showMessagesQueue', undefined),
+	);
 }

@@ -1,31 +1,12 @@
+// editMessage.ts
 import { IExecuteFunctions, INodeExecutionData } from 'n8n-workflow';
+import { executePerItem } from '../helpers/executePerItem';
+import { getParams } from '../helpers/getParams';
+import { greenApiRequest } from '../helpers/request';
 
 export async function editMessage(this: IExecuteFunctions, items: INodeExecutionData[]) {
-    const returnData: INodeExecutionData[] = [];
-
-    for (let i = 0; i < items.length; i++) {
-        const chatId = this.getNodeParameter('chatId', i, '') as string;
-        const idMessage = this.getNodeParameter('idMessage', i, '') as string;
-        const message = this.getNodeParameter('message', i, '') as string;
-        const credentials = await this.getCredentials('greenApiAuthApi') as {
-            idInstance: string;
-            apiTokenKey: string;
-        };
-
-        const response = await this.helpers.httpRequest({
-            method: 'POST',
-            url: `https://api.green-api.com/waInstance${credentials.idInstance}/editMessage/${credentials.apiTokenKey}`,
-            headers: { 'Content-Type': 'application/json' },
-            body: {
-                    'chatId': chatId,
-                    'idMessage': idMessage,
-                    'message': message
-                },
-            json: true,
-        });
-
-        returnData.push(response);
-    }
-
-    return returnData;
+	return executePerItem(this, items,
+		(i) => getParams(this, i, { chatId: {}, idMessage: {}, message: {} }),
+		(p) => greenApiRequest(this, 'POST', 'editMessage', { chatId: p.chatId, idMessage: p.idMessage, message: p.message }),
+	);
 }

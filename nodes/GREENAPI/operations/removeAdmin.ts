@@ -1,29 +1,12 @@
+// removeAdmin.ts
 import { IExecuteFunctions, INodeExecutionData } from 'n8n-workflow';
+import { executePerItem } from '../helpers/executePerItem';
+import { getParams } from '../helpers/getParams';
+import { greenApiRequest } from '../helpers/request';
 
 export async function removeAdmin(this: IExecuteFunctions, items: INodeExecutionData[]) {
-    const returnData: INodeExecutionData[] = [];
-
-    for (let i = 0; i < items.length; i++) {
-        const groupId = this.getNodeParameter('groupId', i, '') as string;
-        const participantChatId = this.getNodeParameter('participantChatId', i, '') as string;
-        const credentials = await this.getCredentials('greenApiAuthApi') as {
-            idInstance: string;
-            apiTokenKey: string;
-        };
-
-        const response = await this.helpers.httpRequest({
-            method: 'POST',
-            url: `https://api.green-api.com/waInstance${credentials.idInstance}/removeAdmin/${credentials.apiTokenKey}`,
-            headers: { 'Content-Type': 'application/json' },
-            body: {
-                    'groupId': groupId,
-                    'participantChatId': participantChatId
-                },
-            json: true,
-        });
-
-        returnData.push(response);
-    }
-
-    return returnData;
+	return executePerItem(this, items,
+		(i) => getParams(this, i, { groupId: {}, participantChatId: {} }),
+		(p) => greenApiRequest(this, 'POST', 'removeAdmin', { groupId: p.groupId, participantChatId: p.participantChatId }),
+	);
 }

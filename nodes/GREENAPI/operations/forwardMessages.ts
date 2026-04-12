@@ -1,50 +1,25 @@
+// forwardMessages.ts
 import { IExecuteFunctions, INodeExecutionData } from 'n8n-workflow';
+import { executePerItem } from '../helpers/executePerItem';
+import { getParams } from '../helpers/getParams';
+import { greenApiRequest } from '../helpers/request';
 
-function transformChatIds(raw: any) {
-    const messages: string[] = [];
-
-    Object.values(raw).forEach((arr) => {
-        if (!Array.isArray(arr)) return;
-
-        arr.forEach((item) => {
-            if (item && item.messageId) {
-                messages.push(item.messageId);
-            }
-        });
-    });
-
-    return messages;
+function extractMessages(raw: any): string[] {
+	return Object.values(raw).flatMap((arr) =>
+		Array.isArray(arr) ? arr.filter((item) => item?.messageId).map((item) => item.messageId) : [],
+	);
 }
 
-
 export async function forwardMessages(this: IExecuteFunctions, items: INodeExecutionData[]) {
-    const returnData: INodeExecutionData[] = [];
-
-    for (let i = 0; i < items.length; i++) {
-        const chatId = this.getNodeParameter('chatId', i, '') as string;
-        const chatIdFrom = this.getNodeParameter('chatIdFrom', i, '') as string;
-        const credentials = await this.getCredentials('greenApiAuthApi') as {
-            idInstance: string;
-            apiTokenKey: string;
-        };
-        const messagesRaw = this.getNodeParameter('messages', i, {}) as {
-            message?: { message: string}[];
-        };
-        const messages = transformChatIds(messagesRaw);
-        const response = await this.helpers.httpRequest({
-            method: 'POST',
-            url: `https://api.green-api.com/waInstance${credentials.idInstance}/forwardMessages/${credentials.apiTokenKey}`,
-            headers: { 'Content-Type': 'application/json' },
-            body: {
-                    'chatId': chatId,
-                    'chatIdFrom': chatIdFrom,
-                    'messages': messages
-                },
-            json: true,
-        });
-
-        returnData.push(response);
-    }
-
-    return returnData;
+	return executePerItem(this, items,
+		(i) => ({
+			...getParams(this, i, { chatId: {}, chatIdFrom: {} }),
+			messagesRaw: this.getNodeParameter('messages', i, {}) as object,
+		}),
+		(p) => greenApiRequest(this, 'POST', 'forwardMessages', {
+			chatId: p.chatId,
+			chatIdFrom: p.chatIdFrom,
+			messages: extractMessages(p.messagesRaw),
+		}),
+	);
 }

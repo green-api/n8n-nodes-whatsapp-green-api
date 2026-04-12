@@ -1,11 +1,11 @@
 import { INodeProperties } from 'n8n-workflow';
-import { accountDescription } from './account/account.description';
-import { sendingOperations } from './sending';
-import { queueOperations } from './queue';
-import { journalOperations } from './journal';
-import { serviceOperations } from './service';
-import { groupOperations } from './group';
-import { statusesDescription } from './statuses/statuses.description';
+import { accountDescription } from './account/accountDescription';
+import { sendingDescription } from './sending/sendingDescription';
+import { queueDescription } from './queue/queueDescription';
+import { journalDescription } from './journal/journalDescription';
+import { serviceDescription } from './service/serviceDescription';
+import { groupDescription } from './group/groupDescription';
+import { statusesDescription } from './statuses/statusesDescription';
 import { receivingOperations } from './receiving/receivingOperations';
 
 export const baseProperties: INodeProperties[] = [
@@ -32,11 +32,11 @@ export const baseProperties: INodeProperties[] = [
 export const properties: INodeProperties[] = [
 	...baseProperties,
 	...accountDescription,
-	...sendingOperations,
-	...queueOperations,
-	...journalOperations,
-	...serviceOperations,
-	...groupOperations,
+	...sendingDescription,
+	...queueDescription,
+	...journalDescription,
+	...serviceDescription,
+	...groupDescription,
 	...statusesDescription,
 	...receivingOperations,
 ];

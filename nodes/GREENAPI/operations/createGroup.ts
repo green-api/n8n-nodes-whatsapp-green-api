@@ -1,50 +1,24 @@
+// createGroup.ts
 import { IExecuteFunctions, INodeExecutionData } from 'n8n-workflow';
+import { executePerItem } from '../helpers/executePerItem';
+import { getParams } from '../helpers/getParams';
+import { greenApiRequest } from '../helpers/request';
 
-function transformChatIds(raw: any) {
-    const chatIds: string[] = [];
-
-    Object.entries(raw).forEach(([key, arr]) => {
-        if (!Array.isArray(arr)) return;
-
-        arr.forEach((item) => {
-            if (item && item.chatIdText) {
-                chatIds.push(item.chatIdText);
-            }
-        });
-    });
-
-    return chatIds;
+function extractChatIds(raw: any): string[] {
+	return Object.values(raw).flatMap((arr) =>
+		Array.isArray(arr) ? arr.filter((item) => item?.chatIdText).map((item) => item.chatIdText) : [],
+	);
 }
 
 export async function createGroup(this: IExecuteFunctions, items: INodeExecutionData[]) {
-    const returnData: INodeExecutionData[] = [];
-
-    for (let i = 0; i < items.length; i++) {
-        const groupName = this.getNodeParameter('groupName', i, '') as string; //?
-        const credentials = await this.getCredentials('greenApiAuthApi') as {
-            idInstance: string;
-            apiTokenKey: string;
-        };
-        
-        const chatIdsRaw = this.getNodeParameter('chatIds', i, {}) as {
-            chatId?: { chatId: string}[];
-        };
-        const chatIds = transformChatIds(chatIdsRaw);
-
-        
-        const response = await this.helpers.httpRequest({
-            method: 'POST',
-            url: `https://api.green-api.com/waInstance${credentials.idInstance}/createGroup/${credentials.apiTokenKey}`,
-            headers: { 'Content-Type': 'application/json' },
-            body: {
-                    'chatIds': chatIds,
-                    'groupName': groupName
-                },
-            json: true,
-        });
-
-        returnData.push(response);
-    }
-
-    return returnData;
+	return executePerItem(this, items,
+		(i) => ({
+			...getParams(this, i, { groupName: {} }),
+			chatIdsRaw: this.getNodeParameter('chatIds', i, {}) as object,
+		}),
+		(p) => greenApiRequest(this, 'POST', 'createGroup', {
+			groupName: p.groupName,
+			chatIds: extractChatIds(p.chatIdsRaw),
+		}),
+	);
 }

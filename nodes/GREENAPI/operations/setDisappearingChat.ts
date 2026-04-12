@@ -1,29 +1,12 @@
+// setDisappearingChat.ts
 import { IExecuteFunctions, INodeExecutionData } from 'n8n-workflow';
+import { executePerItem } from '../helpers/executePerItem';
+import { getParams } from '../helpers/getParams';
+import { greenApiRequest } from '../helpers/request';
 
 export async function setDisappearingChat(this: IExecuteFunctions, items: INodeExecutionData[]) {
-    const returnData: INodeExecutionData[] = [];
-
-    for (let i = 0; i < items.length; i++) {
-        const chatId = this.getNodeParameter('chatId', i, '') as string;
-        const ephemeralExpiration = this.getNodeParameter('ephemeralExpiration', i, '') as number;
-        const credentials = await this.getCredentials('greenApiAuthApi') as {
-            idInstance: string;
-            apiTokenKey: string;
-        };
-
-        const response = await this.helpers.httpRequest({
-            method: 'POST',
-            url: `https://api.green-api.com/waInstance${credentials.idInstance}/setDisappearingChat/${credentials.apiTokenKey}`,
-            headers: { 'Content-Type': 'application/json' },
-            body: {
-                    'chatId': chatId,
-                    'ephemeralExpiration': ephemeralExpiration
-                },
-            json: true,
-        });
-
-        returnData.push(response);
-    }
-
-    return returnData;
+	return executePerItem(this, items,
+		(i) => getParams(this, i, { chatId: {}, ephemeralExpiration: { default: 0 } }),
+		(p) => greenApiRequest(this, 'POST', 'setDisappearingChat', { chatId: p.chatId, ephemeralExpiration: p.ephemeralExpiration }),
+	);
 }

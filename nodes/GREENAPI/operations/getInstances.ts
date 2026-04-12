@@ -1,21 +1,11 @@
+// getInstances.ts
 import { IExecuteFunctions, INodeExecutionData } from 'n8n-workflow';
+import { executePerItem } from '../helpers/executePerItem';
+import { greenApiPartnerRequest } from '../helpers/partnerRequest';
 
 export async function getInstances(this: IExecuteFunctions, items: INodeExecutionData[]) {
-    const returnData: INodeExecutionData[] = [];
-    
-    for (let i = 0; i < items.length; i++) {
-        const credentials = await this.getCredentials('greenApiPartnerAuthApi') as {
-            partnerToken: string;
-        };
-        const response = await this.helpers.httpRequest({
-            method: 'POST',
-            url: `https://api.green-api.com/partner/getInstances/${credentials.partnerToken}`,
-            headers: { 'Content-Type': 'application/json' },
-            json: true,
-        });
-
-        returnData.push(response);
-    }
-
-    return returnData;
+	return executePerItem(this, items,
+		() => ({}),
+		() => greenApiPartnerRequest(this, 'POST', 'getInstances'),
+	);
 }
