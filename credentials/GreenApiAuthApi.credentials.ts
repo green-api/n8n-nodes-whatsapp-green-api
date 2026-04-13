@@ -9,9 +9,8 @@ import {
 export class GreenApiAuthApi implements ICredentialType {
 	name = 'greenApiAuthApi';
 	displayName = 'Green-API API';
-
+	icon = 'file:greenapi.svg' as const;
 	documentationUrl = 'https://green-api.com/en/docs/api';
-
 	properties: INodeProperties[] = [
 		{
 			displayName: 'idInstance',

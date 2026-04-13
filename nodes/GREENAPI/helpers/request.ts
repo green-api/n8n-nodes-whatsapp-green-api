@@ -12,12 +12,16 @@ export async function greenApiRequest(
 		apiTokenKey: string;
 	};
 
-	return ctx.helpers.httpRequest({
-		method,
-		url: `https://api.green-api.com/waInstance${credentials.idInstance}/${endpoint}/${credentials.apiTokenKey}`,
-		headers: { 'Content-Type': 'application/json' },
-		qs,
-		body,
-		json: true,
-	});
+	return ctx.helpers.httpRequestWithAuthentication.call(
+		ctx,
+		'greenApiAuthApi',
+		{
+			method,
+			url: `https://api.green-api.com/waInstance${credentials.idInstance}/${endpoint}/${credentials.apiTokenKey}`,
+			headers: { 'Content-Type': 'application/json' },
+			qs,
+			body,
+			json: true,
+		},
+	);
 }

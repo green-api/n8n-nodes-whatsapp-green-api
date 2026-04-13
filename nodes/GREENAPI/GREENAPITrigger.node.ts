@@ -17,7 +17,6 @@ export class GreenapiTrigger implements INodeType {
 		description: 'Starts the workflow on a Green-Api webhook',
 		defaults: {
 			name: 'GREENAPI Trigger',
-
 		},
 		inputs: [],
 		outputs: [NodeConnectionType.Main],
@@ -57,8 +56,7 @@ export class GreenapiTrigger implements INodeType {
 					{
 						name: 'Outgoing Message Sent From Phone',
 						value: 'outgoingMessageReceived',
-						description:
-							'Trigger on new outgoing message sent from phone',
+						description: 'Trigger on new outgoing message sent from phone',
 					},
 					{
 						name: 'Outgoing Message Sent From API',
@@ -66,7 +64,6 @@ export class GreenapiTrigger implements INodeType {
 						description: 'Trigger on new outgoing message sent from API',
 					},
 				],
-
 				default: [],
 			},
 			{
@@ -94,14 +91,14 @@ export class GreenapiTrigger implements INodeType {
 				required: true,
 				default: 'noReceiveRestriction',
 			},
-            {
+			{
 				displayName: 'Restrict to Chat IDs',
 				hint: 'Process webhooks only from the specified chats.',
 				name: 'chatIds',
 				type: 'fixedCollection',
 				placeholder: 'Add chatId',
 				default: {},
-                typeOptions: {
+				typeOptions: {
 					multipleValues: true,
 				},
 				options: [
@@ -111,100 +108,111 @@ export class GreenapiTrigger implements INodeType {
 						values: [
 							{
 								displayName: 'chatId',
-                                name: 'chatId',
-                                type: 'string',
-                                default: '',
-                                placeholder: '79000000000@c.us',
+								name: 'chatId',
+								type: 'string',
+								default: '',
+								placeholder: '79000000000@c.us',
 							},
 						],
 					},
 				],
 			},
 		],
-		
 	};
 
-
-    webhookMethods: any = {
-        default: {
-
-            async checkExists(this: IHookFunctions): Promise<boolean> {
-                const credentials = await this.getCredentials('greenApiAuthApi');
-                const webhookUrl = this.getNodeWebhookUrl('default');
-
-                const response = await this.helpers.httpRequest({
-                    method: 'GET',
-                    url: `https://api.green-api.com/waInstance${credentials.idInstance}/getSettings/${credentials.apiTokenKey}`,
-                });
-				return response.webhookUrl === webhookUrl;
-            },
-
-            async create(this: IHookFunctions): Promise<void> {
-                const credentials = await this.getCredentials('greenApiAuthApi');  
+	webhookMethods: any = {
+		default: {
+			async checkExists(this: IHookFunctions): Promise<boolean> {
+				const credentials = await this.getCredentials('greenApiAuthApi');
 				const webhookUrl = this.getNodeWebhookUrl('default');
-                
-                await this.helpers.httpRequest({
-                    method: 'POST',
-                    url: `https://api.green-api.com/waInstance${credentials.idInstance}/setSettings/${credentials.apiTokenKey}`,
-                    body: {
-                        webhookUrl: webhookUrl,
-						incomingWebhook: 'yes',
-						outgoingAPIMessageWebhook: 'yes',
-    					outgoingMessageWebhook: 'yes',
-                    },
-                    json: true,
-                });
-            },
 
-			async delete(this: IHookFunctions): Promise<void> { 
-                const credentials = await this.getCredentials('greenApiAuthApi');
-                
-                await this.helpers.httpRequest({
-                    method: 'POST',
-                    url: `https://api.green-api.com/waInstance${credentials.idInstance}/setSettings/${credentials.apiTokenKey}`,
-                    body: {
-                        //webhookUrl: "",
-                    },
-                    json: true,
-                });
-            },
-        }
-    }
-    
-    async webhook(this: IWebhookFunctions): Promise<IWebhookResponseData> {
+				const response = await this.helpers.httpRequestWithAuthentication.call(
+					this,
+					'greenApiAuthApi',
+					{
+						method: 'GET',
+						url: `https://api.green-api.com/waInstance${credentials.idInstance}/getSettings/${credentials.apiTokenKey}`,
+					},
+				);
+				return response.webhookUrl === webhookUrl;
+			},
+
+			async create(this: IHookFunctions): Promise<void> {
+				const credentials = await this.getCredentials('greenApiAuthApi');
+				const webhookUrl = this.getNodeWebhookUrl('default');
+
+				await this.helpers.httpRequestWithAuthentication.call(
+					this,
+					'greenApiAuthApi',
+					{
+						method: 'POST',
+						url: `https://api.green-api.com/waInstance${credentials.idInstance}/setSettings/${credentials.apiTokenKey}`,
+						body: {
+							webhookUrl: webhookUrl,
+							incomingWebhook: 'yes',
+							outgoingAPIMessageWebhook: 'yes',
+							outgoingMessageWebhook: 'yes',
+						},
+						json: true,
+					},
+				);
+			},
+
+			async delete(this: IHookFunctions): Promise<void> {
+				const credentials = await this.getCredentials('greenApiAuthApi');
+
+				await this.helpers.httpRequestWithAuthentication.call(
+					this,
+					'greenApiAuthApi',
+					{
+						method: 'POST',
+						url: `https://api.green-api.com/waInstance${credentials.idInstance}/setSettings/${credentials.apiTokenKey}`,
+						body: {
+							webhookUrl: '',
+						},
+						json: true,
+					},
+				);
+			},
+		},
+	};
+
+	async webhook(this: IWebhookFunctions): Promise<IWebhookResponseData> {
 		const typeWebhook = [
-			'incomingMessageReceived', 
-			'outgoingAPIMessageReceived', 
-			'outgoingMessageReceived', 
-			//'outgoingMessageStatus', 
-			//'incomingBlock', 
-			//'incomingCall', 
-			//'stateInstanceChanged', 
-			//'quotaExceeded'
+			'incomingMessageReceived',
+			'outgoingAPIMessageReceived',
+			'outgoingMessageReceived',
 		];
-        const body = this.getBodyData();
+		const body = this.getBodyData();
 		const data = this.helpers.returnJsonArray(body);
 		const thisTypeWebhook = data[0].json.typeWebhook as string;
 		const chosenTypeWebhook = this.getNodeParameter('webhookType', []) as string[];
 
-		if ((Array.isArray(chosenTypeWebhook) && chosenTypeWebhook.includes(thisTypeWebhook)) || (chosenTypeWebhook.length === 0) && typeWebhook.includes(thisTypeWebhook)){
+		if (
+			(Array.isArray(chosenTypeWebhook) && chosenTypeWebhook.includes(thisTypeWebhook)) ||
+			(chosenTypeWebhook.length === 0 && typeWebhook.includes(thisTypeWebhook))
+		) {
 			const chatType = this.getNodeParameter('chatType') as string;
 			const thisMessageChatType = ((data[0].json as any).senderData.chatId).slice(-4) as string;
 			let thisChatType!: string;
 
-			if(thisMessageChatType === 'c.us'){
-				thisChatType = 'chatReceiveRestriction'
+			if (thisMessageChatType === 'c.us') {
+				thisChatType = 'chatReceiveRestriction';
 			}
-			if(thisMessageChatType === 'g.us'){
-				thisChatType = 'groupReceiveRestriction'
+			if (thisMessageChatType === 'g.us') {
+				thisChatType = 'groupReceiveRestriction';
 			}
+
 			const chatsCollection = this.getNodeParameter('chatIds', 0, {}) as {
 				chatId: { chatId: string }[];
 			};
-			const chats = (chatsCollection.chatId || []).map(c => c.chatId);
-			const thisChatWebhook = (data[0].json as any).senderData.chatId as string; 
+			const chats = (chatsCollection.chatId || []).map((c) => c.chatId);
+			const thisChatWebhook = (data[0].json as any).senderData.chatId as string;
 
-			if (((Array.isArray(chats) && chats.includes(thisChatWebhook)) || (chats.length === 0)) && ((chatType === thisChatType) || (chatType === 'noReceiveRestriction'))){ 
+			if (
+				((Array.isArray(chats) && chats.includes(thisChatWebhook)) || chats.length === 0) &&
+				(chatType === thisChatType || chatType === 'noReceiveRestriction')
+			) {
 				if (thisTypeWebhook === 'incomingMessageReceived') {
 					const messageData = (data[0].json as any).messageData;
 					let unifiedMessageText = '';

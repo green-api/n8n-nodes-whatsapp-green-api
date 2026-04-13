@@ -1,6 +1,6 @@
 {
   "name": "@green-api/n8n-nodes-whatsapp-greenapi",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "n8n node for Green-API for WhatsApp",
   "keywords": [
     "n8n-community-node-package",
@@ -11,7 +11,7 @@
     "automation"
   ],
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://github.com/green-api/n8n-nodes-whatsapp-green-api",
   "author": {
     "name": "GREEN API",
     "email": "support@green-api.com"
@@ -35,13 +35,11 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/credentials/GreenApiAuthApi.credentials.js",
-      "dist/credentials/GreenApiPartnerAuthApi.credentials.js"
+      "dist/credentials/GreenApiAuthApi.credentials.js"
     ],
     "nodes": [
       "dist/nodes/Greenapi/Greenapi.node.js",
-      "dist/nodes/Greenapi/GreenapiTrigger.node.js",
-      "dist/nodes/Greenapi/GreenapiPartner.node.js"
+      "dist/nodes/Greenapi/GreenapiTrigger.node.js"
     ]
   },
   "devDependencies": {
@@ -50,7 +48,8 @@
     "eslint-plugin-n8n-nodes-base": "^1.16.4",
     "gulp": "^5.0.1",
     "prettier": "^2.7.1",
-    "typescript": "~4.8.4"
+    "typescript": "^6.0.2",
+    "zod": "^3.25.76"
   },
   "peerDependencies": {
     "n8n-workflow": "*"

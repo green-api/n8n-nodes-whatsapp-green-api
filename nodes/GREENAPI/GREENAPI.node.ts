@@ -75,6 +75,7 @@ export class Greenapi implements INodeType {
 		icon: 'file:greenapi.svg',
 		group: ['transform'],
 		version: 1,
+		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
 		description: 'Send and receive WhatsApp messages using Green-API.',
 		defaults: {
 			name: 'GREENAPI',
