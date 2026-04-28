@@ -1,6 +1,6 @@
 {
   "name": "@green-api/n8n-nodes-whatsapp-greenapi",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "n8n node for Green-API for WhatsApp",
   "keywords": [
     "n8n-community-node-package",
