@@ -15,7 +15,7 @@ export const sendFileByUrlFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'fileName',
+		displayName: 'File Name',
 		name: 'fileName',
 		type: 'string',
 		default: '',

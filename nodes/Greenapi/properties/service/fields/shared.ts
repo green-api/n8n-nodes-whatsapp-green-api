@@ -2,7 +2,7 @@ import { INodeProperties } from 'n8n-workflow';
 
 export const sharedFields: INodeProperties[] = [
 	{
-		displayName: 'chatId',
+		displayName: 'Chat ID',
 		name: 'chatId',
 		type: 'string',
 		default: '',

@@ -44,7 +44,7 @@ export const sendPollFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'multipleAnswers',
+		displayName: 'Multiple Answers',
 		name: 'multipleAnswers',
 		type: 'boolean',
 		default: false,

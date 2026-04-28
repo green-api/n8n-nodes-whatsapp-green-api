@@ -1,4 +1,3 @@
-
 import {
 	ICredentialType,
 	INodeProperties,
@@ -13,14 +12,14 @@ export class GreenApiAuthApi implements ICredentialType {
 	documentationUrl = 'https://green-api.com/en/docs/api';
 	properties: INodeProperties[] = [
 		{
-			displayName: 'idInstance',
+			displayName: 'Instance ID',
 			name: 'idInstance',
 			type: 'string',
 			required: true,
 			default: '',
 		},
 		{
-			displayName: 'apiTokenKey',
+			displayName: 'API Token Key',
 			name: 'apiTokenKey',
 			type: 'string',
 			required: true,

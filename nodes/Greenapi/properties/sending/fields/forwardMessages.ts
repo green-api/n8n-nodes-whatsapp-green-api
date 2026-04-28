@@ -2,7 +2,7 @@ import { INodeProperties } from 'n8n-workflow';
 
 export const forwardMessagesFields: INodeProperties[] = [
 	{
-		displayName: 'chatIdFrom',
+		displayName: 'Chat ID From',
 		name: 'chatIdFrom',
 		type: 'string',
 		default: '',
@@ -29,7 +29,7 @@ export const forwardMessagesFields: INodeProperties[] = [
 				name: 'message',
 				values: [
 					{
-						displayName: 'messageId',
+						displayName: 'Message ID',
 						name: 'messageId',
 						type: 'string',
 						default: '',

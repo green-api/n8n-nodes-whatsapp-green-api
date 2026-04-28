@@ -2,7 +2,7 @@ import { INodeProperties } from 'n8n-workflow';
 
 export const sharedFields: INodeProperties[] = [
 	{
-		displayName: 'chatId',
+		displayName: 'Chat ID',
 		name: 'chatId',
 		type: 'string',
 		placeholder: '79000000000@c.us',
@@ -18,7 +18,7 @@ export const sharedFields: INodeProperties[] = [
 		required: true,
 	},
 	{
-		displayName: 'quotedMessageId',
+		displayName: 'Quoted Message ID',
 		name: 'quotedMessageId',
 		type: 'string',
 		default: '',

@@ -2,7 +2,7 @@ import { INodeProperties } from 'n8n-workflow';
 
 export const editMessageFields: INodeProperties[] = [
 	{
-		displayName: 'idMessage',
+		displayName: 'Message ID',
 		name: 'idMessage',
 		type: 'string',
 		default: '',

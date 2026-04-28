@@ -16,7 +16,7 @@ export const createGroupFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'chatIds',
+		displayName: 'Chat IDs',
 		name: 'chatIds',
 		type: 'fixedCollection',
 		placeholder: 'Add chatId',
@@ -27,11 +27,11 @@ export const createGroupFields: INodeProperties[] = [
 		},
 		options: [
 			{
-				displayName: 'chatId',
+				displayName: 'Chat ID',
 				name: 'chatId',
 				values: [
 					{
-						displayName: 'chatId',
+						displayName: 'Chat ID',
 						name: 'chatIdText',
 						type: 'string',
 						default: '',

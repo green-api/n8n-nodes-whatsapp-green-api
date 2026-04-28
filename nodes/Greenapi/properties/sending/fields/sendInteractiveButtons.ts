@@ -85,7 +85,7 @@ export const sendInteractiveButtonsFields: INodeProperties[] = [
 						placeholder: 'TEXT',
 					},
 					{
-						displayName: 'phoneNumber',
+						displayName: 'Phone Number',
 						name: 'phoneNumber',
 						type: 'string',
 						default: '',
@@ -105,7 +105,7 @@ export const sendInteractiveButtonsFields: INodeProperties[] = [
 						placeholder: 'TEXT',
 					},
 					{
-						displayName: 'copyCode',
+						displayName: 'Copy Code',
 						name: 'copyCode',
 						type: 'string',
 						default: '',
