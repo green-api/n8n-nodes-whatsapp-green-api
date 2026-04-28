@@ -13,7 +13,7 @@ export const serviceOperations: INodeProperties[] = [
 		},
 		options: [
 			{ name: 'Archive Chat', value: 'archiveChat', action: 'Archive a chat' },
-			{ name: 'Check WhatsApp', value: 'checkWhatsapp', action: 'Check WhatsApp account availability' },
+			{ name: 'Check WhatsApp', value: 'checkWhatsapp', action: 'Check whats app account availability' },
 			{ name: 'Delete Message', value: 'deleteMessage', action: 'Delete a message' },
 			{ name: 'Edit Message', value: 'editMessage', action: 'Edit the text message' },
 			{ name: 'Get Avatar', value: 'getAvatar', action: 'Get avatar' },

@@ -5,7 +5,6 @@ import type {
 	INodeTypeDescription,
 	IWebhookResponseData,
 } from 'n8n-workflow';
-import { NodeConnectionType } from 'n8n-workflow';
 
 export class GreenapiTrigger implements INodeType {
 	description: INodeTypeDescription = {
@@ -19,7 +18,7 @@ export class GreenapiTrigger implements INodeType {
 			name: 'GREENAPI Trigger',
 		},
 		inputs: [],
-		outputs: [NodeConnectionType.Main],
+		outputs: ['main'],
 		credentials: [
 			{
 				name: 'greenApiAuthApi',

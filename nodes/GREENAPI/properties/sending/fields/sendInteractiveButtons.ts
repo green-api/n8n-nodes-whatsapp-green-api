@@ -34,7 +34,7 @@ export const sendInteractiveButtonsFields: INodeProperties[] = [
 		type: 'string',
 		placeholder: 'Footer',
 		default: '',
-		description: 'Message footer.',
+		description: 'Message footer',
 		displayOptions: {
 			show: {
 				operation: ['sendInteractiveButtons'],
