@@ -1,11 +1,11 @@
 // helpers/partnerRequest.ts
-import { IExecuteFunctions, IHttpRequestMethods } from 'n8n-workflow';
+import { IExecuteFunctions, IHttpRequestMethods, IHttpRequestOptions } from 'n8n-workflow';
 
 export async function greenApiPartnerRequest(
 	ctx: IExecuteFunctions,
 	method: IHttpRequestMethods,
 	endpoint: string,
-	body?: unknown,
+	body?: IHttpRequestOptions['body'],
 ) {
 	const credentials = await ctx.getCredentials('greenApiPartnerAuthApi') as {
 		partnerToken: string;

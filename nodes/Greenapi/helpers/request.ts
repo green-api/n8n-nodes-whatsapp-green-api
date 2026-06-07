@@ -1,10 +1,10 @@
-import { IExecuteFunctions, IHttpRequestMethods, IDataObject } from 'n8n-workflow';
+import { IExecuteFunctions, IHttpRequestMethods, IDataObject, IHttpRequestOptions } from 'n8n-workflow';
 
 export async function greenApiRequest(
 	ctx: IExecuteFunctions,
 	method: IHttpRequestMethods,
 	endpoint: string,
-	body?: unknown,
+	body?: IHttpRequestOptions['body'],
 	qs?: IDataObject,
 ) {
 	const credentials = await ctx.getCredentials('greenApiAuthApi') as {

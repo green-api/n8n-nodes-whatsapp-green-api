@@ -70,7 +70,7 @@ import { getIncomingStatuses } from './operations/getIncomingStatuses';
 export class Greenapi implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'GREEN-API for WhatsApp',
-		name: 'greenapi',
+		name: 'greenapiForWhatsApp',
 		icon: 'file:greenapi.svg',
 		group: ['transform'],
 		version: 1,

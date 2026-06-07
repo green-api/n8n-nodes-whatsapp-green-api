@@ -8,8 +8,8 @@ import type {
 
 export class GreenapiTrigger implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'GREEN-API Trigger',
-		name: 'greenapiTrigger',
+		displayName: 'GREEN-API for WhatsApp Trigger',
+		name: 'greenapiForWhatsAppTrigger',
 		icon: 'file:greenapi.svg',
 		group: ['trigger'],
 		version: 1,
