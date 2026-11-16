@@ -22,6 +22,16 @@ import { getChatHistory } from './operations/getChatHistory';
 import { getMessage } from './operations/getMessage';
 import { lastIncomingMessages } from './operations/lastIncomingMessages';
 import { lastOutgoingMessages } from './operations/lastOutgoingMessages';
+import { lastIncomingCalls } from './operations/lastIncomingCalls';
+import { lastOutgoingCalls } from './operations/lastOutgoingCalls';
+
+// calls
+import { callsDial } from './operations/callsDial';
+import { callsAccept } from './operations/callsAccept';
+import { callsReject } from './operations/callsReject';
+import { callsHangUp } from './operations/callsHangUp';
+import { callsState } from './operations/callsState';
+import { getCallRecording } from './operations/getCallRecording';
 
 // account
 import { getSettings } from './operations/getSettings';
@@ -112,6 +122,16 @@ export class Greenapi implements INodeType {
 			case 'getMessage':             responseData = await getMessage.call(this, items); break;
 			case 'lastIncomingMessages':   responseData = await lastIncomingMessages.call(this, items); break;
 			case 'lastOutgoingMessages':   responseData = await lastOutgoingMessages.call(this, items); break;
+			case 'lastIncomingCalls':      responseData = await lastIncomingCalls.call(this, items); break;
+			case 'lastOutgoingCalls':      responseData = await lastOutgoingCalls.call(this, items); break;
+
+			// calls
+			case 'callsDial':              responseData = await callsDial.call(this, items); break;
+			case 'callsAccept':            responseData = await callsAccept.call(this, items); break;
+			case 'callsReject':            responseData = await callsReject.call(this, items); break;
+			case 'callsHangUp':            responseData = await callsHangUp.call(this, items); break;
+			case 'callsState':             responseData = await callsState.call(this, items); break;
+			case 'getCallRecording':       responseData = await getCallRecording.call(this, items); break;
 
 			// account
 			case 'getSettings':            responseData = await getSettings.call(this, items); break;
