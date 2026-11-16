@@ -5,6 +5,7 @@ import type {
 	INodeTypeDescription,
 	IWebhookResponseData,
 } from 'n8n-workflow';
+import { callWebhookSettings, webhookChatId } from './helpers/callWebhooks';
 
 export class GreenapiTrigger implements INodeType {
 	description: INodeTypeDescription = {
@@ -44,23 +45,33 @@ export class GreenapiTrigger implements INodeType {
 			{
 				displayName: 'Trigger On',
 				name: 'webhookType',
-				hint: 'Types of processed webhooks. All types will be processed if none is selected.',
+				hint: 'Types of processed webhooks. All message types will be processed if none is selected.',
 				type: 'multiOptions',
 				options: [
+					{
+						name: 'Incoming Call',
+						value: 'incomingCall',
+						description: 'Trigger on incoming call events: ringing, answered, ended',
+					},
 					{
 						name: 'Incoming Message',
 						value: 'incomingMessageReceived',
 						description: 'Trigger on new incoming message',
 					},
 					{
-						name: 'Outgoing Message Sent From Phone',
-						value: 'outgoingMessageReceived',
-						description: 'Trigger on new outgoing message sent from phone',
+						name: 'Outgoing Call',
+						value: 'outgoingCall',
+						description: 'Trigger on outgoing call events: calling, answered, ended',
 					},
 					{
 						name: 'Outgoing Message Sent From API',
 						value: 'outgoingAPIMessageReceived',
 						description: 'Trigger on new outgoing message sent from API',
+					},
+					{
+						name: 'Outgoing Message Sent From Phone',
+						value: 'outgoingMessageReceived',
+						description: 'Trigger on new outgoing message sent from phone',
 					},
 				],
 				default: [],
@@ -133,7 +144,9 @@ export class GreenapiTrigger implements INodeType {
 						url: `https://api.green-api.com/waInstance${credentials.idInstance}/getSettings/${credentials.apiTokenKey}`,
 					},
 				);
-				return response.webhookUrl === webhookUrl;
+				const callSettings = callWebhookSettings(this.getNodeParameter('webhookType', []) as string[]);
+				return response.webhookUrl === webhookUrl &&
+					Object.entries(callSettings).every(([setting, value]) => response[setting] === value);
 			},
 
 			async create(this: IHookFunctions): Promise<void> {
@@ -151,6 +164,7 @@ export class GreenapiTrigger implements INodeType {
 							incomingWebhook: 'yes',
 							outgoingAPIMessageWebhook: 'yes',
 							outgoingMessageWebhook: 'yes',
+							...callWebhookSettings(this.getNodeParameter('webhookType', []) as string[]),
 						},
 						json: true,
 					},
@@ -192,7 +206,8 @@ export class GreenapiTrigger implements INodeType {
 			(chosenTypeWebhook.length === 0 && typeWebhook.includes(thisTypeWebhook))
 		) {
 			const chatType = this.getNodeParameter('chatType') as string;
-			const thisMessageChatType = ((data[0].json as any).senderData.chatId).slice(-4) as string;
+			const thisChatWebhook = webhookChatId(data[0].json as any);
+			const thisMessageChatType = thisChatWebhook.slice(-4);
 			let thisChatType!: string;
 
 			if (thisMessageChatType === 'c.us') {
@@ -206,7 +221,6 @@ export class GreenapiTrigger implements INodeType {
 				chatId: { chatId: string }[];
 			};
 			const chats = (chatsCollection.chatId || []).map((c) => c.chatId);
-			const thisChatWebhook = (data[0].json as any).senderData.chatId as string;
 
 			if (
 				((Array.isArray(chats) && chats.includes(thisChatWebhook)) || chats.length === 0) &&

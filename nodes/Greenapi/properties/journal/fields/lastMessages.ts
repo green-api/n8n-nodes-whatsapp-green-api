@@ -9,7 +9,7 @@ export const lastMessagesFields: INodeProperties[] = [
 		placeholder: '1440 minutes by default',
 		displayOptions: {
 			show: {
-				operation: ['lastIncomingMessages', 'lastOutgoingMessages'],
+				operation: ['lastIncomingMessages', 'lastOutgoingMessages', 'lastIncomingCalls', 'lastOutgoingCalls'],
 			},
 		},
 	},

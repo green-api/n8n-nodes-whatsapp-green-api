@@ -30,8 +30,9 @@ To use this node, you need to have an instance and token from [Green-API](https:
 |-----------|----------|
 | 👤 **Account** | getSettings, setSettings, getStateInstance, reboot, logout, getWaSettings |
 | ✉️ **Sending** | sendMessage, sendPoll, sendFileByUrl, sendLocation, sendContact, forwardMessages, sendInteractiveButtons, sendInteractiveButtonsReply |
-| 📥 **Receiving** | webhookTrigger, downloadFile |
-| 📜 **Journals** | getChatHistory, getMessage, lastIncomingMessages, lastOutgoingMessages |
+| 📥 **Receiving** | webhookTrigger (messages and calls), downloadFile |
+| 📞 **Calls** | callsDial, callsAccept, callsReject, callsHangUp, callsState, getCallRecording |
+| 📜 **Journals** | getChatHistory, getMessage, lastIncomingMessages, lastOutgoingMessages, lastIncomingCalls, lastOutgoingCalls |
 | 🧾 **Queues** | showMessagesQueue, clearMessagesQueue |
 | 👥 **Groups** | createGroup, updateGroupName, getGroupData, addGroupParticipant, deleteGroupParticipant, setGroupAdmin, removeGroupAdmin, leaveGroup |
 | 📣 **Statuses** | sendTextStatus, sendVoiceStatus, sendMediaStatus, deleteStatus, getStatusStatistic, getIncomingStatuses, getOutgoingStatuses |
@@ -121,6 +122,16 @@ To use this node, you need to have an instance and token from [Green-API](https:
   "phoneNumber": 79000000000
 }
 ```
+
+### 📞 Make Call
+```json
+{
+  "operation": "callsDial",
+  "chatId": "79001234567@c.us"
+}
+```
+
+Calls connect without audio in n8n. To react to calls, select **Incoming Call** or **Outgoing Call** in the trigger's **Trigger On** field; the event's `status` field tells what happened (`offer`, `pickUp`, `hungUp`, `declined`, `missed`).
 ---
 
 ## 🔗 Resources

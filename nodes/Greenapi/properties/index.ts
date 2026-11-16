@@ -1,5 +1,6 @@
 import { INodeProperties } from 'n8n-workflow';
 import { accountDescription } from './account/accountDescription';
+import { callsDescription } from './calls/callsDescription';
 import { sendingDescription } from './sending/sendingDescription';
 import { queueDescription } from './queue/queueDescription';
 import { journalDescription } from './journal/journalDescription';
@@ -15,6 +16,7 @@ export const baseProperties: INodeProperties[] = [
 		type: 'options',
 		options: [
 			{ name: 'Account', value: 'account' },
+			{ name: 'Call', value: 'calls' },
 			{ name: 'Group', value: 'group' },
 			{ name: 'Journal', value: 'journal' },
 			{ name: 'Queue', value: 'queue' },
@@ -32,6 +34,7 @@ export const baseProperties: INodeProperties[] = [
 export const properties: INodeProperties[] = [
 	...baseProperties,
 	...accountDescription,
+	...callsDescription,
 	...sendingDescription,
 	...queueDescription,
 	...journalDescription,
